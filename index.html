@@ -11,26 +11,50 @@
 
     <!-- Particules de fond (la poussière) -->
     <div class="particles"></div>
+<div class="particles"></div>
 
     <nav>
-        <div class="logo">Jules<span>Balluais</span></div>
-        <ul>
-            <li><a href="#home">Accueil</a></li>
-            <li><a href="#infos">Informations</a></li>
-            <li><a href="#parcours">Parcours</a></li>
-            <li><a href="#projets">Projets</a></li>
-            <li><a href="#stage" class="btn-contact">Stage Comet</a></li>
-        </ul>
+        <div class="nav-container">
+            <div class="logo">JULES<span>BALLUAIS</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#infos">Infos</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#projets">Projets</a></li>
+            </ul>
+            <a href="#stage" class="nav-btn">TÉLÉCHARGER CV</a>
+        </div>
     </nav>
 
-    <header id="home">
-        <div class="hero-content">
-            <p class="subtitle">2024 - 2026</p>
-            <h1>PORTFOLIO</h1>
-            <p>Étudiant en <span>BUT Mesures Physiques</span> à l'IUT de Blois. <br> Spécialisé en instrumentation et métrologie.</p>
-            <div class="hero-btns">
-                <a href="#projets" class="btn-primary">Voir mes projets</a>
-                <a href="#stage" class="btn-secondary">Mon stage chez Comet</a>
+    <header id="home" class="hero">
+        <div class="hero-wrapper">
+            <p class="welcome-text">WELCOME TO MY</p>
+            <h1 class="main-title">PORTFOLIO</h1>
+            <p class="description">
+                L’instrumentation n’est pas qu’une affaire de mesures. Entre <span>automates complexes</span>, 
+                capteurs de pointe et <span>analyse de données R&D</span>, découvrez mon univers 
+                technique au sein du BUT Mesures Physiques.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="#projets" class="btn-gold">VOIR MES PROJETS</a>
+                <a href="#stage" class="btn-outline">STAGE COMET</a>
+            </div>
+
+            <!-- La barre de stats comme sur le serveur SAO -->
+            <div class="status-bar">
+                <div class="stat-item">
+                    <span class="stat-val">2026</span>
+                    <span class="stat-label">ANNÉE DE STAGE</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">BLOIS</span>
+                    <span class="stat-label">IUT D'ORIGINE</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val active">EN LIGNE</span>
+                    <span class="stat-label">DISPONIBILITÉ</span>
+                </div>
             </div>
         </div>
     </header>
