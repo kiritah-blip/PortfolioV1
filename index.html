@@ -22,10 +22,10 @@
       --blue:     #5b9bd5;
       --blue-dim: #3a6b9a;
     }
- 
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
- 
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -34,7 +34,7 @@
       line-height: 1.75;
       overflow-x: hidden;
     }
- 
+
     body::after {
       content: '';
       position: fixed; inset: 0;
@@ -50,7 +50,7 @@
         radial-gradient(1px 1px at 85% 88%, rgba(255,255,255,0.18) 0%, transparent 100%);
       pointer-events: none; z-index: 0;
     }
- 
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -67,7 +67,7 @@
     .nav-links a:hover { color: var(--text); }
     .nav-cv { color: var(--accent) !important; border: 1px solid var(--accent) !important; padding: 0.45rem 1rem; transition: all 0.25s !important; }
     .nav-cv:hover { background: var(--accent) !important; color: var(--bg) !important; }
- 
+
     /* ── HERO ── */
     #accueil {
       position: relative; z-index: 1;
@@ -76,7 +76,7 @@
       padding: 8rem 2rem 5rem;
     }
     #accueil::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 65% 55% at 50% 48%, rgba(91,155,213,0.07) 0%, transparent 70%); pointer-events: none; }
- 
+
     .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.3s; }
     .hero-title { font-family: 'Cinzel', serif; font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 700; line-height: 1.05; letter-spacing: 0.06em; color: var(--text); text-transform: uppercase; text-shadow: 0 2px 40px rgba(91,155,213,0.15); opacity: 0; animation: fadeUp 0.9s ease forwards 0.55s; }
     .hero-name-line { display: block; font-size: clamp(1.4rem, 4vw, 2.8rem); letter-spacing: 0.25em; color: var(--text2); font-weight: 400; text-shadow: none; margin-top: 0.3rem; }
@@ -85,25 +85,25 @@
     .hero-sub { font-size: 1rem; color: var(--text2); max-width: 520px; opacity: 0; animation: fadeUp 0.9s ease forwards 1s; }
     .hero-sub strong { color: var(--text); font-weight: 500; }
     .hero-btns { display: flex; gap: 1rem; margin-top: 2.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.9s ease forwards 1.2s; }
- 
+
     .btn { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.9rem 2.2rem; text-decoration: none; border: 1px solid; transition: all 0.28s; display: inline-block; cursor: pointer; }
     .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
     .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
     .btn-ghost { background: transparent; color: var(--text2); border-color: var(--border2); }
     .btn-ghost:hover { border-color: var(--text2); color: var(--text); }
- 
+
     .scroll-cue { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.6rem; opacity: 0; animation: fadeIn 1s ease forwards 1.8s; }
     .scroll-cue span { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
     .scroll-cue-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--accent2), transparent); animation: linePulse 2s ease-in-out infinite; }
     @keyframes linePulse { 0%,100%{opacity:.3}50%{opacity:1} }
- 
+
     /* ── SECTIONS ── */
     section { position: relative; z-index: 1; border-top: 1px solid var(--border); }
     .section-wrap { max-width: 1080px; margin: 0 auto; padding: 6rem 2rem; }
     .s-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.7rem; }
     .s-title { font-family: 'Cinzel', serif; font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 600; color: var(--text); margin-bottom: 0.9rem; }
     .s-rule { width: 36px; height: 1px; background: linear-gradient(to right, var(--accent), transparent); margin-bottom: 3rem; }
- 
+
     /* ── INFOS ── */
     .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
     .about-text p { color: var(--text2); margin-bottom: 1.1rem; font-size: 1rem; }
@@ -114,7 +114,7 @@
     .info-row:last-child { border-bottom: none; }
     .info-row .label { color: var(--muted); font-style: italic; }
     .info-row .val { color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.73rem; }
- 
+
     /* ── PARCOURS ── */
     .timeline { display: flex; flex-direction: column; }
     .tl-item { display: grid; grid-template-columns: 75px 1px 1fr; gap: 0 1.5rem; padding-bottom: 2rem; }
@@ -124,10 +124,10 @@
     .tl-line::before { content: ''; position: absolute; top: 3px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; border: 1px solid var(--accent2); background: var(--bg); }
     .tl-body h4 { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
     .tl-body p { font-size: 0.87rem; color: var(--muted); font-style: italic; }
- 
+
     /* ── PROJECT CARDS ── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
- 
+
     .card {
       background: var(--surface); border: 1px solid var(--border);
       padding: 1.8rem; position: relative; overflow: hidden;
@@ -137,16 +137,16 @@
     .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--blue-dim), transparent); transform: scaleX(0); transition: transform 0.4s; }
     .card:hover { border-color: rgba(91,155,213,0.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
     .card:hover::before { transform: scaleX(1); }
- 
+
     .card-num { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.8rem; }
     .card-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(232,185,74,0.25); background: rgba(232,185,74,0.06); padding: 0.18rem 0.65rem; margin-bottom: 0.9rem; border-radius: 2px; }
     .card-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.7rem; }
     .card-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.65; flex: 1; }
     .card-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
     .tool-pill { font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; color: var(--blue); border: 1px solid rgba(91,155,213,0.2); background: rgba(91,155,213,0.06); padding: 0.15rem 0.55rem; border-radius: 2px; }
- 
+
     .card-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
- 
+
     .btn-more {
       font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em;
       text-transform: uppercase; color: var(--accent); background: transparent;
@@ -157,7 +157,7 @@
     .btn-more:hover { background: rgba(232,185,74,0.1); border-color: var(--accent); }
     .btn-more svg { width: 12px; height: 12px; transition: transform 0.25s; }
     .btn-more:hover svg { transform: translateX(3px); }
- 
+
     /* ── COMPÉTENCES ── */
     .skills-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 2.5rem; }
     .skill-group h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.3rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border2); }
@@ -168,7 +168,7 @@
     .skill-track { height: 2px; background: var(--border2); overflow: hidden; }
     .skill-prog { height: 100%; background: linear-gradient(to right, var(--blue-dim), var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(0.16,1,0.3,1); }
     .skill-prog.go { transform: scaleX(1); }
- 
+
     /* ── CONTACT ── */
     .contact-wrap { text-align: center; }
     .contact-wrap .s-rule { margin-left: auto; margin-right: auto; }
@@ -177,12 +177,12 @@
     .c-link { display: flex; align-items: center; gap: 0.65rem; font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text2); text-decoration: none; border: 1px solid var(--border2); background: var(--surface); padding: 0.9rem 1.7rem; transition: all 0.25s; }
     .c-link svg { width: 15px; height: 15px; opacity: 0.6; }
     .c-link:hover { border-color: var(--accent); color: var(--accent); }
- 
+
     /* ── FOOTER ── */
     footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); }
     .ft-name { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--text2); }
     .ft-copy { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); }
- 
+
     /* ══════════════════════════════
        MODAL SYSTEM
     ══════════════════════════════ */
@@ -197,7 +197,7 @@
       overflow-y: auto;
     }
     .modal-overlay.open { opacity: 1; pointer-events: all; }
- 
+
     .modal {
       background: #1a1f2a;
       border: 1px solid var(--border2);
@@ -208,13 +208,13 @@
       margin: auto;
     }
     .modal-overlay.open .modal { transform: translateY(0); }
- 
+
     .modal-header {
       padding: 2.5rem 3rem 2rem;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
- 
+
     .modal-close {
       position: absolute; top: 1.5rem; right: 1.5rem;
       width: 36px; height: 36px;
@@ -224,34 +224,34 @@
       transition: all 0.2s; font-size: 1.1rem;
     }
     .modal-close:hover { background: var(--surface2); color: var(--text); border-color: var(--border2); }
- 
+
     .modal-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
     .modal-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; color: var(--text); margin-bottom: 0.8rem; }
- 
+
     .modal-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
     .modal-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(232,185,74,0.25); background: rgba(232,185,74,0.06); padding: 0.2rem 0.7rem; border-radius: 2px; }
     .modal-tag.blue { color: var(--blue); border-color: rgba(91,155,213,0.25); background: rgba(91,155,213,0.06); }
- 
+
     .modal-body { padding: 2.5rem 3rem; }
- 
+
     .modal-section { margin-bottom: 2.5rem; }
     .modal-section:last-child { margin-bottom: 0; }
- 
+
     .modal-section-title {
       font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em;
       text-transform: uppercase; color: var(--blue);
       margin-bottom: 1rem; padding-bottom: 0.6rem;
       border-bottom: 1px solid var(--border);
     }
- 
+
     .modal-section p { color: var(--text2); font-size: 0.95rem; margin-bottom: 0.8rem; }
     .modal-section p:last-child { margin-bottom: 0; }
     .modal-section strong { color: var(--text); font-weight: 500; }
- 
+
     .modal-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
     .modal-list li { font-size: 0.92rem; color: var(--text2); padding-left: 1.2rem; position: relative; }
     .modal-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent2); font-size: 0.75rem; }
- 
+
     /* Timeline du projet */
     .proj-timeline { display: flex; flex-direction: column; gap: 0; }
     .pt-item { display: grid; grid-template-columns: 110px 1px 1fr; gap: 0 1.2rem; padding-bottom: 1.5rem; }
@@ -262,13 +262,13 @@
     .pt-body { padding-top: 0; }
     .pt-body h5 { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 0.15rem; }
     .pt-body p { font-size: 0.85rem; color: var(--muted); font-style: italic; }
- 
+
     /* Logiciels grid */
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.8rem; }
     .tool-card { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.2rem; }
     .tool-card h5 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.3rem; }
     .tool-card p { font-size: 0.82rem; color: var(--muted); }
- 
+
     /* Résultats modèle */
     .model-box {
       background: var(--surface); border: 1px solid rgba(91,155,213,0.2);
@@ -280,26 +280,86 @@
     .model-box .params { display: flex; flex-wrap: wrap; gap: 1rem; }
     .model-box .param { font-size: 0.78rem; color: var(--text2); }
     .model-box .param span { color: var(--accent); }
- 
+
     /* Compétences list in modal */
     .comp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .comp-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text2); border: 1px solid var(--border2); background: var(--surface); padding: 0.3rem 0.8rem; border-radius: 2px; }
- 
+
+    /* Modal images */
+    .modal-img {
+      margin: 1.2rem 0;
+      border: 1px solid var(--border2);
+      background: var(--surface);
+      overflow: hidden;
+    }
+    .modal-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .modal-img figcaption {
+      padding: 0.7rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+
+    .modal-img-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin: 1.2rem 0;
+    }
+    .modal-img-row .modal-img { margin: 0; }
+
+    .modal-img-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      align-items: start;
+    }
+    .modal-img-side .modal-img { margin: 0; }
+    @media (max-width: 700px) {
+      .modal-img-side { grid-template-columns: 1fr; }
+    }
+
+    /* Timeline logos */
+    .tl-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 4px;
+      background: white;
+      padding: 4px;
+      object-fit: contain;
+      margin-top: 2px;
+    }
+    .tl-item-logo {
+      display: grid;
+      grid-template-columns: 75px 50px 1px 1fr;
+      gap: 0 1rem;
+      padding-bottom: 2rem;
+    }
+
     /* Défis */
     .defi-list { display: flex; flex-direction: column; gap: 0.8rem; }
     .defi-item { background: var(--surface); border: 1px solid var(--border); padding: 0.9rem 1.2rem; }
     .defi-item h5 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
     .defi-item p { font-size: 0.88rem; color: var(--text2); }
- 
+
     /* Conclusion box */
     .conclusion-box { background: var(--surface); border: 1px solid var(--border2); border-left: 3px solid var(--accent); padding: 1.4rem 1.8rem; font-size: 0.95rem; color: var(--text2); font-style: italic; }
- 
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)} }
     @keyframes fadeIn { from{opacity:0}to{opacity:1} }
     .reveal { opacity:0; transform:translateY(24px); transition:opacity .75s ease,transform .75s ease; }
     .reveal.on { opacity:1; transform:translateY(0); }
- 
+
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -311,7 +371,7 @@
   </style>
 </head>
 <body>
- 
+
   <nav>
     <a href="#accueil" class="nav-logo">Jules <span>Balluais</span></a>
     <ul class="nav-links">
@@ -324,7 +384,7 @@
       <li><a href="#" class="nav-cv">Télécharger CV</a></li>
     </ul>
   </nav>
- 
+
   <!-- HERO -->
   <div id="accueil" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;">
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 48%, rgba(91,155,213,0.07) 0%, transparent 70%);pointer-events:none;"></div>
@@ -338,7 +398,7 @@
     </div>
     <div class="scroll-cue"><span>Découvrir</span><div class="scroll-cue-line"></div></div>
   </div>
- 
+
   <!-- INFOS -->
   <section id="apropos">
     <div class="section-wrap">
@@ -365,7 +425,7 @@
       </div>
     </div>
   </section>
- 
+
   <!-- PARCOURS -->
   <section id="parcours">
     <div class="section-wrap">
@@ -376,22 +436,40 @@
         <div class="tl-item">
           <div class="tl-year">2020<br>2023</div>
           <div class="tl-line"></div>
-          <div class="tl-body"><h4>Lycée Balzac — Tours Centre</h4><p>Baccalauréat</p></div>
+          <div class="tl-body" style="display:flex;align-items:flex-start;gap:1rem;">
+            <img src="images/Logo_balzac.png" alt="Lycée Balzac" class="tl-logo">
+            <div>
+              <h4>Lycée Balzac — Tours Centre</h4>
+              <p>Baccalauréat</p>
+            </div>
+          </div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2023<br>2024</div>
           <div class="tl-line"></div>
-          <div class="tl-body"><h4>Université de Poitiers</h4><p>Licence Sciences pour l'Ingénieur</p></div>
+          <div class="tl-body" style="display:flex;align-items:flex-start;gap:1rem;">
+            <img src="images/Logo_IUT_Poitier.png" alt="Université de Poitiers" class="tl-logo">
+            <div>
+              <h4>Université de Poitiers</h4>
+              <p>Licence Sciences pour l'Ingénieur</p>
+            </div>
+          </div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2024<br>2026</div>
           <div class="tl-line"></div>
-          <div class="tl-body"><h4>IUT de Blois</h4><p>BUT Mesures Physiques</p></div>
+          <div class="tl-body" style="display:flex;align-items:flex-start;gap:1rem;">
+            <img src="images/Logo_IUT_BLOIS.png" alt="IUT de Blois" class="tl-logo">
+            <div>
+              <h4>IUT de Blois</h4>
+              <p>BUT Mesures Physiques</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
- 
+
   <!-- PROJETS -->
   <section id="projets">
     <div class="section-wrap">
@@ -399,7 +477,7 @@
       <h2 class="s-title reveal">Mes travaux</h2>
       <div class="s-rule reveal"></div>
       <div class="projects-grid">
- 
+
         <!-- PROJET 1 -->
         <div class="card reveal">
           <p class="card-num">Projet 01 · 1ère Année</p>
@@ -419,7 +497,7 @@
             </button>
           </div>
         </div>
- 
+
         <!-- PROJET 2 -->
         <div class="card reveal">
           <p class="card-num">Projet 02 · 1ère Année</p>
@@ -437,7 +515,7 @@
             </button>
           </div>
         </div>
- 
+
         <!-- PROJET 3 -->
         <div class="card reveal">
           <p class="card-num">Projet 03 · 2ème Année</p>
@@ -457,7 +535,7 @@
             </button>
           </div>
         </div>
- 
+
         <!-- STAGE -->
         <div class="card reveal">
           <p class="card-num">Projet 04 · Stage · 2026</p>
@@ -477,7 +555,7 @@
             </button>
           </div>
         </div>
- 
+
         <!-- ATELIER RADIO -->
         <div class="card reveal">
           <p class="card-num">Projet 05 · Atelier</p>
@@ -496,11 +574,11 @@
             </button>
           </div>
         </div>
- 
+
       </div>
     </div>
   </section>
- 
+
   <!-- COMPÉTENCES -->
   <section id="competences">
     <div class="section-wrap">
@@ -540,7 +618,7 @@
       </div>
     </div>
   </section>
- 
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-wrap contact-wrap">
@@ -564,12 +642,12 @@
       </div>
     </div>
   </section>
- 
+
   <footer>
     <span class="ft-name">Jules Balluais</span>
     <span class="ft-copy">© 2025 — BUT Mesures Physiques · IUT de Blois</span>
   </footer>
- 
+
   <!-- ══════════════════════════════
        MODAL — OSCILLATION DU PENDULE
   ══════════════════════════════ -->
@@ -587,7 +665,12 @@
         </div>
       </div>
       <div class="modal-body">
- 
+
+        <figure class="modal-img" style="max-width:380px;margin-left:auto;margin-right:auto;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Oscillating_pendulum.gif" alt="Animation d'un pendule oscillant" loading="lazy">
+          <figcaption>Animation d'un pendule oscillant (source : Wikimedia Commons)</figcaption>
+        </figure>
+
         <div class="modal-section">
           <p class="modal-section-title">Objectif</p>
           <ul class="modal-list">
@@ -595,7 +678,7 @@
             <li>Analyser le comportement dynamique et traiter les données issues de plusieurs oscillations</li>
           </ul>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Timeline du projet</p>
           <div class="proj-timeline">
@@ -626,7 +709,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Matériel utilisé</p>
           <ul class="modal-list">
@@ -634,8 +717,18 @@
             <li>Téléphone avec l'application Phyphox</li>
             <li>Support pour suspendre le pendule</li>
           </ul>
+          <div class="modal-img-side">
+            <figure class="modal-img">
+              <img src="images/Test_Oscillation.png" alt="Montage expérimental du pendule" loading="lazy">
+              <figcaption>Montage expérimental — pendule avec téléphone</figcaption>
+            </figure>
+            <figure class="modal-img">
+              <img src="images/Utile_Oscillation.png" alt="Repère des axes du gyroscope" loading="lazy">
+              <figcaption>Axes du gyroscope (téléphone)</figcaption>
+            </figure>
+          </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Logiciels utilisés</p>
           <div class="tools-grid">
@@ -645,7 +738,7 @@
             <div class="tool-card"><h5>GoogleDoc</h5><p>Compte-rendu final en anglais</p></div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Résultats expérimentaux</p>
           <p>En testant le module gyroscopique avant l'expérience, nous savions que la rotation autour de l'axe z serait celle impliquée dans le pendule. Cela a été confirmé en examinant les données : l'axe z présentait la plus grande amplitude.</p>
@@ -659,14 +752,22 @@
               <span class="param">φ = <span>0</span></span>
             </div>
           </div>
+          <figure class="modal-img">
+            <img src="images/Signal_Oscillation.png" alt="Données gyroscope sur 3 axes" loading="lazy">
+            <figcaption>Données gyroscope sur les 3 axes — l'axe Z présente la plus grande amplitude</figcaption>
+          </figure>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Analyse des résultats</p>
           <p>La sinusoïde amortie est un très bon modèle pour la vitesse angulaire d'un pendule. La valeur expérimentale ω = 3.56 rad/sec est proche de la formule théorique pour ω qui donne 3.67 ± 0.13 rad/sec, et la différence est inférieure à l'incertitude de mesure.</p>
           <p>La longueur entre le support et le centre du téléphone était de 73 cm, cette mesure n'étant pas totalement précise car nous ne disposions pas d'un mètre ruban approprié.</p>
+          <figure class="modal-img">
+            <img src="images/Signal_Oscillation2.png" alt="Modélisation par sinusoïde amortie" loading="lazy">
+            <figcaption>Données expérimentales (bleu) vs modèle sinusoïdal amorti (orange) — excellente correspondance</figcaption>
+          </figure>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Défis relevés</p>
           <div class="defi-list">
@@ -684,7 +785,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Compétences développées</p>
           <div class="comp-tags">
@@ -697,18 +798,18 @@
             <span class="comp-tag">Anglais rédactionnel</span>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Conclusion</p>
           <div class="conclusion-box">
             À l'aide d'équipements faciles à trouver et d'un téléphone, nous avons étudié la vitesse d'un pendule. Nous avons pu le modéliser avec une fonction sinusoïdale amortie d'une excellente précision. De plus, nous avons confirmé la formule donnée pour la fréquence angulaire du pendule, qui équivaut à la formule de sa période.
           </div>
         </div>
- 
+
       </div>
     </div>
   </div>
- 
+
   <!-- MODAL — ULTRASONS -->
   <div class="modal-overlay" id="modal-ultrasons" onclick="closeModalOnOverlay(event, 'ultrasons')">
     <div class="modal">
@@ -724,7 +825,7 @@
         </div>
       </div>
       <div class="modal-body">
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Objectif</p>
           <ul class="modal-list">
@@ -733,7 +834,7 @@
             <li>Répondre à la problématique : <strong>Comment les ultrasons se propagent-ils dans le vide ?</strong></li>
           </ul>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Timeline du projet</p>
           <div class="proj-timeline">
@@ -764,7 +865,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Matériel utilisé</p>
           <ul class="modal-list">
@@ -775,13 +876,17 @@
             <li><strong>Environnement de test</strong> — Cuve à vide hermétique (rayon ≈ 6 cm) + pompe à vide jusqu'à −1 bar</li>
           </ul>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Description de l'expérience</p>
           <p>Pour mesurer la propagation des ultrasons dans une machine à vide, un support métallique intégrant les deux capteurs (émetteur MA40S4S et récepteur MA40S4R) a été assemblé. Les capteurs ont été soudés à l'aide d'étain et protégés par des gaines pour assurer solidité et étanchéité. Le support a été fixé à l'intérieur d'un cylindre métallique inséré dans la cuve à vide.</p>
           <p>Les fils des capteurs ont été connectés à une plaque de prototypage reliée à l'extérieur de la cuve, puis aux instruments de mesure. En diminuant progressivement la pression, nous avons observé sur l'oscilloscope l'évolution du signal ultrasonore en fonction du niveau de vide.</p>
+          <figure class="modal-img">
+            <img src="images/Sch%C3%A9ma_ultrasons_%C3%A9lectroniques.png" alt="Schéma électronique Kicad" loading="lazy">
+            <figcaption>Schéma électronique du circuit (Kicad) — amplification du signal récepteur</figcaption>
+          </figure>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Logiciels utilisés</p>
           <div class="tools-grid">
@@ -791,7 +896,7 @@
             <div class="tool-card"><h5>Word</h5><p>Rédaction du compte-rendu</p></div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Résultats expérimentaux</p>
           <p>La pression atmosphérique normale est d'environ 1 bar. Lorsque la pression relative atteint −1 bar, la pression absolue devient proche de 0 bar, correspondant à un vide quasi complet. Dans ces conditions, la transmission des ultrasons devient théoriquement impossible faute de milieu de propagation.</p>
@@ -806,14 +911,24 @@
             </div>
           </div>
           <p style="margin-top:1rem;">Cette courbe montre de façon nette que <strong>la propagation de l'onde ultrasonore dépend directement de la pression</strong>.</p>
+          <div class="modal-img-side">
+            <figure class="modal-img">
+              <img src="images/Signal_elec_ultrasons.png" alt="Signal sur oscilloscope" loading="lazy">
+              <figcaption>Signal ultrasonore observé à l'oscilloscope</figcaption>
+            </figure>
+            <figure class="modal-img">
+              <img src="images/Courbe_elec_ultrasons.png" alt="Amplitude en fonction de la pression" loading="lazy">
+              <figcaption>Amplitude (V) en fonction de la pression (bar)</figcaption>
+            </figure>
+          </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Analyse et discussion</p>
           <p>La propagation des ultrasons dépend de la présence d'un milieu matériel, car il s'agit d'une onde mécanique. Les mesures montrent une diminution progressive de l'amplitude du signal lorsque la pression diminue : forte à pression atmosphérique (~4.6 V), elle tend vers zéro à mesure que le vide s'installe.</p>
           <p>D'après la loi des gaz parfaits (PV = nRT), la baisse de pression réduit le nombre de particules disponibles pour propager l'onde, expliquant ainsi la disparition du signal lorsque la pression atteint −1 bar. Malgré quelques pertes et réflexions possibles, les résultats valident l'hypothèse.</p>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Compétences développées</p>
           <div class="comp-tags">
@@ -825,14 +940,14 @@
             <span class="comp-tag">Schématisation (Kicad)</span>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Conclusion</p>
           <div class="conclusion-box">
             L'objectif de ce projet était d'étudier la propagation des ultrasons dans un milieu soumis à une pression décroissante jusqu'à un vide relatif. À l'aide d'une cuve à vide, un émetteur et un récepteur ultrasonores ont été alignés afin de mesurer l'amplitude du signal en fonction de la pression. Les résultats montrent une baisse progressive du signal jusqu'à son annulation vers −1 bar, confirmant que les ultrasons, ondes mécaniques, nécessitent un milieu matériel pour se propager. L'équation des gaz parfaits (PV = nRT) soutient cette observation. L'expérience valide l'hypothèse et illustre clairement la dépendance des ondes mécaniques à la présence d'un milieu.
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Annexes</p>
           <div class="defi-list">
@@ -846,11 +961,11 @@
             </div>
           </div>
         </div>
- 
+
       </div>
     </div>
   </div>
- 
+
   <!-- MODAL — SPECTROMÈTRE -->
   <div class="modal-overlay" id="modal-spectro" onclick="closeModalOnOverlay(event, 'spectro')">
     <div class="modal">
@@ -866,7 +981,12 @@
         </div>
       </div>
       <div class="modal-body">
- 
+
+        <figure class="modal-img">
+          <img src="images/Affiche_spectro.png" alt="Affiche du projet Spectromètre" loading="lazy">
+          <figcaption>Affiche du projet — Spectromètre connecté pour le dosage des nitrites</figcaption>
+        </figure>
+
         <div class="modal-section">
           <p class="modal-section-title">Objectif</p>
           <ul class="modal-list">
@@ -877,7 +997,7 @@
             <li>Communication professionnelle et technique (notice en anglais)</li>
           </ul>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Timeline du projet</p>
           <div class="proj-timeline">
@@ -913,7 +1033,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Principe Optique</p>
           <p>L'objectif est de mesurer l'absorbance du complexe coloré rose (réactif de Griess) dont le pic d'absorption se situe dans les longueurs d'onde vertes. La loi de Beer-Lambert relie l'absorbance à la concentration :</p>
@@ -925,8 +1045,12 @@
               <span class="param">Capteur : <span>Photodétecteur TSL2591</span></span>
             </div>
           </div>
+          <figure class="modal-img">
+            <img src="images/Principe_Optique_Spectro.png" alt="Principe optique du spectromètre" loading="lazy">
+            <figcaption>Principe optique : LED verte → Cuve avec solution → Photodétecteur</figcaption>
+          </figure>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Description de la conception</p>
           <ul class="modal-list">
@@ -934,8 +1058,22 @@
             <li><strong>Principe Mécanique</strong> — Enceinte opaque assurant une isolation optique de 97 %. Le puits de cuve maintient LED et capteur dans un axe rigoureusement identique.</li>
             <li><strong>Principe Chimique</strong> — Dosage des nitrites dans la Loire. Solution mère 100 mg/L, 5 étalons de 0,05 à 2 mg/L. Ajout de 1 mL de réactif de Griess, 15 min de réaction, puis lecture de l'absorbance.</li>
           </ul>
+          <div class="modal-img-side">
+            <figure class="modal-img">
+              <img src="images/Bo%C3%AEte_Optique_Spectro.png" alt="Intérieur du boîtier optique" loading="lazy">
+              <figcaption>Intérieur du boîtier — Arduino + capteur TSL2591</figcaption>
+            </figure>
+            <figure class="modal-img">
+              <img src="images/Bo%C3%AEte2_Spectro.png" alt="Boîtier extérieur fermé" loading="lazy">
+              <figcaption>Boîtier fermé — enceinte opaque (isolation 97%)</figcaption>
+            </figure>
+          </div>
+          <figure class="modal-img" style="max-width:380px;margin-left:auto;margin-right:auto;">
+            <img src="images/Chimie_spectro.png" alt="Cuve avec solution rose réactif de Griess" loading="lazy">
+            <figcaption>Cuve avec le complexe coloré rose (réactif de Griess)</figcaption>
+          </figure>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Cahier des charges</p>
           <div class="tools-grid">
@@ -945,7 +1083,7 @@
             <div class="tool-card"><h5>Conditions</h5><p>Mesure en enceinte fermée, isolation optique totale</p></div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Logiciels utilisés</p>
           <div class="tools-grid">
@@ -955,7 +1093,7 @@
             <div class="tool-card"><h5>Mindview</h5><p>Planification Gantt</p></div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Tests de métrologie</p>
           <div class="defi-list">
@@ -980,8 +1118,26 @@
               <p>Durbin-Watson DW = 2,50 (résidus indépendants) · Shapiro-Wilk p = 0,607 (normalité validée) · Grubbs G &lt; 1,887 (aucune valeur aberrante) · Breusch-Pagan p = 0,45 (variance constante).</p>
             </div>
           </div>
+          <figure class="modal-img">
+            <img src="images/Courbe_%C3%A9talonnage_spectro.png" alt="Courbe d'étalonnage de l'absorbance" loading="lazy">
+            <figcaption>Courbe d'étalonnage de l'absorbance — R² ≈ 0,998 (linéarité Beer-Lambert validée)</figcaption>
+          </figure>
+          <div class="modal-img-row">
+            <figure class="modal-img">
+              <img src="images/Mesure_spectro.png" alt="Mesures spectro" loading="lazy">
+              <figcaption>Tests stabilité & dérive</figcaption>
+            </figure>
+            <figure class="modal-img">
+              <img src="images/Mesure2_spectro.png" alt="Mesures spectro" loading="lazy">
+              <figcaption>Test de répétabilité</figcaption>
+            </figure>
+            <figure class="modal-img">
+              <img src="images/Mesure3_spectro.png" alt="Mesures spectro" loading="lazy">
+              <figcaption>Test étanchéité optique</figcaption>
+            </figure>
+          </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Compétences développées</p>
           <div class="comp-tags">
@@ -995,14 +1151,14 @@
             <span class="comp-tag">Tests statistiques métrologie</span>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Conclusion</p>
           <div class="conclusion-box">
             Ce spectromètre valide avec succès le dosage des nitrites dans la Loire. Avec une isolation optique de 97 %, l'instrument atteint une linéarité de R² = 0,998 et une limite de détection de 0,01 mg/L. Les tests de Shapiro-Wilk (p = 0,607) et de Grubbs confirment la fiabilité statistique des mesures, garantissant une incertitude maîtrisée de ± 0,06 mg/L.
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Annexes</p>
           <div class="defi-list">
@@ -1016,11 +1172,11 @@
             </div>
           </div>
         </div>
- 
+
       </div>
     </div>
   </div>
- 
+
   <!-- MODAL — ATELIER RADIO -->
   <div class="modal-overlay" id="modal-radio" onclick="closeModalOnOverlay(event, 'radio')">
     <div class="modal">
@@ -1035,7 +1191,12 @@
         </div>
       </div>
       <div class="modal-body">
- 
+
+        <figure class="modal-img">
+          <img src="images/Affiche_radio.png" alt="Affiche du projet radio" loading="lazy">
+          <figcaption>Équipe radio — J. Balluais · A. Moubine · A. Amzighe (Radio Campus Tours 99.5)</figcaption>
+        </figure>
+
         <div class="modal-section">
           <p class="modal-section-title">Objectif</p>
           <ul class="modal-list">
@@ -1046,7 +1207,7 @@
             <li>Travail collaboratif et répartition des rôles</li>
           </ul>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Timeline du projet</p>
           <div class="proj-timeline">
@@ -1072,7 +1233,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Explication du projet</p>
           <p>Ce projet a été réalisé dans le cadre d'un atelier médiatique en partenariat avec <strong>Radio Campus Tours</strong>. L'objectif central était de s'immerger dans l'univers de la communication radiophonique en produisant une émission de <strong>15 minutes</strong>, de la phase de conception à l'enregistrement en studio dans les conditions du direct.</p>
@@ -1092,7 +1253,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Logiciels & outils utilisés</p>
           <div class="tools-grid">
@@ -1101,7 +1262,7 @@
             <div class="tool-card"><h5>Mail</h5><p>Échange d'avancement avec l'équipe</p></div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Compétences développées</p>
           <p style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--blue);text-transform:uppercase;margin-bottom:0.7rem;">Communication</p>
@@ -1117,14 +1278,14 @@
             <span class="comp-tag">Synthèse et esprit critique</span>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Conclusion</p>
           <div class="conclusion-box">
             Au-delà de la thématique choisie, cet atelier visait à savoir confronter des points de vue opposés, argumenter sous la pression du direct et savoir synthétiser des enjeux globaux. Il s'agissait de comprendre comment l'information est construite, structurée et diffusée sur les ondes. Cette expérience m'a permis d'acquérir une aisance orale et une meilleure compréhension des formats de communication journalistique, tout en respectant les contraintes professionnelles (temps, ligne éditoriale, qualité sonore).
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Annexes — Équipe : J.Balluais · A.Moubine · A.Amzighe</p>
           <div class="defi-list">
@@ -1138,11 +1299,11 @@
             </div>
           </div>
         </div>
- 
+
       </div>
     </div>
   </div>
- 
+
   <!-- MODAL — STAGE COMET TRAITEMENTS -->
   <div class="modal-overlay" id="modal-stage" onclick="closeModalOnOverlay(event, 'stage')">
     <div class="modal">
@@ -1158,7 +1319,7 @@
         </div>
       </div>
       <div class="modal-body">
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Contexte & Objectif</p>
           <p>Stage réalisé chez <strong>Comet Traitements</strong> en Belgique, filiale du groupe GroupComet spécialisée dans le tri et l'analyse de métaux. Le groupe possède déjà une machine d'analyse IA pour les plastiques (reconnaissance NIR + aspect) et souhaite développer l'équivalent pour les métaux.</p>
@@ -1172,7 +1333,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Planning du stage (51 jours)</p>
           <div class="proj-timeline">
@@ -1208,7 +1369,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Ingénierie du Protocole de Préparation</p>
           <p>La précision de l'IA dépend directement de la propreté de surface des métaux. J'ai développé un <strong>logigramme de décision</strong> adaptatif selon la granulométrie et l'état d'oxydation de chaque lot.</p>
@@ -1220,7 +1381,7 @@
           </div>
           <p style="margin-top:1rem;">Résultat clé : l'auto-attrition à sec seule est insuffisante. Le <strong>sable abrasif est le seul levier</strong> permettant de révéler les couleurs des métaux (cuivre/laiton) pour la segmentation IA.</p>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Verrous méthodologiques identifiés</p>
           <div class="defi-list">
@@ -1238,7 +1399,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Partenariat Eagle Vizion (Canada)</p>
           <p>Eagle Vizion développe un banc d'essai prototype dédié intégrant l'ensemble des technologies de détection avancées : lumière polarisée (biréfringence), LED haute densité, caméra 4K, UV, spectro couleur complet et auto-calibrage IA.</p>
@@ -1251,7 +1412,7 @@
           </ul>
           <p style="margin-top:1rem;">Mon rôle : préparer les lots témoins (4 niveaux de propreté) et participer au <strong>labeling</strong> (étiquetage des images pour l'entraînement IA) à distance en visioconférence.</p>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Cahiers des charges rédigés</p>
           <div class="defi-list">
@@ -1269,7 +1430,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="modal-section">
           <p class="modal-section-title">Compétences développées</p>
           <div class="comp-tags">
@@ -1284,11 +1445,11 @@
             <span class="comp-tag">Anglais rédactionnel</span>
           </div>
         </div>
- 
+
       </div>
     </div>
   </div>
- 
+
   <script>
     // Modal open/close
     function openModal(id) {
@@ -1297,18 +1458,18 @@
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
- 
+
     function closeModal(id) {
       const overlay = document.getElementById('modal-' + id);
       if (!overlay) return;
       overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
- 
+
     function closeModalOnOverlay(e, id) {
       if (e.target === e.currentTarget) closeModal(id);
     }
- 
+
     // Close on Escape
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
@@ -1318,7 +1479,7 @@
         });
       }
     });
- 
+
     // Scroll reveal
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
@@ -1326,7 +1487,7 @@
       });
     }, { threshold: 0.07, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
- 
+
     // Skill bars
     const skillObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1337,7 +1498,7 @@
       });
     }, { threshold: 0.25 });
     document.querySelectorAll('.skill-group').forEach(el => skillObs.observe(el));
- 
+
     // Nav active
     const allSections = document.querySelectorAll('[id]:not([id^="modal"])');
     const navAs = document.querySelectorAll('.nav-links a:not(.nav-cv)');
