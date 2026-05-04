@@ -9,25 +9,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #181c22;
-      --bg2:       #1e2330;
-      --bg3:       #232936;
-      --surface:   #242a35;
-      --surface2:  #2c3343;
-      --border:    rgba(255,255,255,0.07);
-      --border2:   rgba(255,255,255,0.13);
-      --text:      #dde3ee;
-      --text2:     #a8b3c8;
-      --muted:     #6a7590;
-      --accent:    #e8b94a;   /* yellow/gold like Gemini version */
-      --accent2:   #c99a30;
-      --blue:      #5b9bd5;
-      --blue-dim:  #3a6b9a;
+      --bg:       #181c22;
+      --surface:  #242a35;
+      --surface2: #2c3343;
+      --border:   rgba(255,255,255,0.07);
+      --border2:  rgba(255,255,255,0.13);
+      --text:     #dde3ee;
+      --text2:    #a8b3c8;
+      --muted:    #6a7590;
+      --accent:   #e8b94a;
+      --accent2:  #c99a30;
+      --blue:     #5b9bd5;
+      --blue-dim: #3a6b9a;
     }
-
+ 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
+ 
     body {
       background: var(--bg);
       color: var(--text);
@@ -36,534 +34,284 @@
       line-height: 1.75;
       overflow-x: hidden;
     }
-
-    /* ── subtle star-like dots background ── */
+ 
     body::after {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background-image:
         radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.25) 0%, transparent 100%),
         radial-gradient(1px 1px at 34% 72%, rgba(255,255,255,0.18) 0%, transparent 100%),
-        radial-gradient(1px 1px at 58% 9%,  rgba(255,255,255,0.22) 0%, transparent 100%),
+        radial-gradient(1px 1px at 58%  9%, rgba(255,255,255,0.22) 0%, transparent 100%),
         radial-gradient(1px 1px at 76% 55%, rgba(255,255,255,0.15) 0%, transparent 100%),
         radial-gradient(1px 1px at 91% 30%, rgba(255,255,255,0.20) 0%, transparent 100%),
         radial-gradient(1px 1px at 22% 90%, rgba(255,255,255,0.14) 0%, transparent 100%),
         radial-gradient(1px 1px at 67% 80%, rgba(255,255,255,0.16) 0%, transparent 100%),
-        radial-gradient(1px 1px at 44% 45%, rgba(255,255,255,0.10) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 5%  60%, rgba(255,255,255,0.12) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 5% 60%, rgba(255,255,255,0.12) 0%, transparent 100%),
         radial-gradient(1px 1px at 85% 88%, rgba(255,255,255,0.18) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
-
+ 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem 4rem;
-      background: rgba(24,28,34,0.88);
+      background: rgba(24,28,34,0.90);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-
-    .nav-logo {
-      font-family: 'Cinzel', serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-    }
-
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 0.82rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--blue); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.2rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.25s;
-    }
-
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.25s; }
     .nav-links a:hover { color: var(--text); }
-
-    .nav-cv {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent) !important;
-      border: 1px solid var(--accent) !important;
-      padding: 0.5rem 1.1rem;
-      transition: all 0.25s !important;
-    }
-
-    .nav-cv:hover {
-      background: var(--accent) !important;
-      color: var(--bg) !important;
-    }
-
+    .nav-cv { color: var(--accent) !important; border: 1px solid var(--accent) !important; padding: 0.45rem 1rem; transition: all 0.25s !important; }
+    .nav-cv:hover { background: var(--accent) !important; color: var(--bg) !important; }
+ 
     /* ── HERO ── */
     #accueil {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
       padding: 8rem 2rem 5rem;
     }
-
-    /* radial glow — warm grey/slate, NOT blue */
-    #accueil::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 65% 55% at 50% 48%, rgba(91,155,213,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 35% at 20% 85%, rgba(232,185,74,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 35% 30% at 82% 15%, rgba(232,185,74,0.04) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 1.8rem;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.3s;
-    }
-
-    .hero-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: 0.06em;
-      color: var(--text);
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.55s;
-    }
-
-    /* subtle metallic feel via text-shadow */
-    .hero-title {
-      text-shadow: 0 2px 40px rgba(91,155,213,0.15), 0 1px 0 rgba(255,255,255,0.08);
-    }
-
-    .hero-name-line {
-      display: block;
-      font-size: clamp(1.4rem, 4vw, 2.8rem);
-      letter-spacing: 0.25em;
-      color: var(--text2);
-      font-weight: 400;
-      text-shadow: none;
-      margin-top: 0.3rem;
-    }
-
-    .hero-name-line em {
-      font-style: normal;
-      color: var(--blue);
-      font-weight: 600;
-    }
-
-    .hero-rule {
-      width: 50px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--accent), transparent);
-      margin: 2rem auto;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.8s;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--text2);
-      max-width: 520px;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 1s;
-    }
-
+    #accueil::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 65% 55% at 50% 48%, rgba(91,155,213,0.07) 0%, transparent 70%); pointer-events: none; }
+ 
+    .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.3s; }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 700; line-height: 1.05; letter-spacing: 0.06em; color: var(--text); text-transform: uppercase; text-shadow: 0 2px 40px rgba(91,155,213,0.15); opacity: 0; animation: fadeUp 0.9s ease forwards 0.55s; }
+    .hero-name-line { display: block; font-size: clamp(1.4rem, 4vw, 2.8rem); letter-spacing: 0.25em; color: var(--text2); font-weight: 400; text-shadow: none; margin-top: 0.3rem; }
+    .hero-name-line em { font-style: normal; color: var(--blue); font-weight: 600; }
+    .hero-rule { width: 50px; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 2rem auto; opacity: 0; animation: fadeUp 0.9s ease forwards 0.8s; }
+    .hero-sub { font-size: 1rem; color: var(--text2); max-width: 520px; opacity: 0; animation: fadeUp 0.9s ease forwards 1s; }
     .hero-sub strong { color: var(--text); font-weight: 500; }
-
-    .hero-btns {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2.8rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 1.2s;
-    }
-
-    .btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.9rem 2.2rem;
-      text-decoration: none;
-      border: 1px solid;
-      transition: all 0.28s;
-      display: inline-block;
-    }
-
+    .hero-btns { display: flex; gap: 1rem; margin-top: 2.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.9s ease forwards 1.2s; }
+ 
+    .btn { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.9rem 2.2rem; text-decoration: none; border: 1px solid; transition: all 0.28s; display: inline-block; cursor: pointer; }
     .btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
     .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
-
     .btn-ghost { background: transparent; color: var(--text2); border-color: var(--border2); }
     .btn-ghost:hover { border-color: var(--text2); color: var(--text); }
-
-    .scroll-cue {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards 1.8s;
-    }
-
-    .scroll-cue span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .scroll-cue-line {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--accent2), transparent);
-      animation: linePulse 2s ease-in-out infinite;
-    }
-
-    @keyframes linePulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-
+ 
+    .scroll-cue { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.6rem; opacity: 0; animation: fadeIn 1s ease forwards 1.8s; }
+    .scroll-cue span { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+    .scroll-cue-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--accent2), transparent); animation: linePulse 2s ease-in-out infinite; }
+    @keyframes linePulse { 0%,100%{opacity:.3}50%{opacity:1} }
+ 
     /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
-
-    .s-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 0.7rem;
-    }
-
-    .s-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.9rem;
-    }
-
-    .s-rule {
-      width: 36px;
-      height: 1px;
-      background: linear-gradient(to right, var(--accent), transparent);
-      margin-bottom: 3rem;
-    }
-
-    /* ── À PROPOS ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
+    section { position: relative; z-index: 1; border-top: 1px solid var(--border); }
+    .section-wrap { max-width: 1080px; margin: 0 auto; padding: 6rem 2rem; }
+    .s-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.7rem; }
+    .s-title { font-family: 'Cinzel', serif; font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 600; color: var(--text); margin-bottom: 0.9rem; }
+    .s-rule { width: 36px; height: 1px; background: linear-gradient(to right, var(--accent), transparent); margin-bottom: 3rem; }
+ 
+    /* ── INFOS ── */
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
     .about-text p { color: var(--text2); margin-bottom: 1.1rem; font-size: 1rem; }
     .about-text strong { color: var(--text); font-weight: 500; }
-
-    /* Infos card */
-    .info-card {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      padding: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .info-card h4 {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 1.2rem;
-    }
-
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.55rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
-    }
-
+    .info-card { background: var(--surface); border: 1px solid var(--border2); padding: 2rem; }
+    .info-card h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.2rem; }
+    .info-row { display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
     .info-row:last-child { border-bottom: none; }
     .info-row .label { color: var(--muted); font-style: italic; }
-    .info-row .val   { color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.75rem; }
-
-    /* Timeline */
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-
-    .tl-item {
-      display: grid;
-      grid-template-columns: 75px 1px 1fr;
-      gap: 0 1.5rem;
-      padding-bottom: 2rem;
-    }
-
+    .info-row .val { color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.73rem; }
+ 
+    /* ── PARCOURS ── */
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item { display: grid; grid-template-columns: 75px 1px 1fr; gap: 0 1.5rem; padding-bottom: 2rem; }
     .tl-item:last-child { padding-bottom: 0; }
-
-    .tl-year {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--muted);
-      text-align: right;
-      padding-top: 2px;
-      line-height: 1.4;
-    }
-
+    .tl-year { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); text-align: right; padding-top: 2px; line-height: 1.4; }
     .tl-line { position: relative; background: var(--border2); }
-
-    .tl-line::before {
-      content: '';
-      position: absolute;
-      top: 3px; left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      width: 8px; height: 8px;
-      border: 1px solid var(--accent2);
-      background: var(--bg);
-    }
-
-    .tl-body h4 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.2rem;
-    }
-
+    .tl-line::before { content: ''; position: absolute; top: 3px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; border: 1px solid var(--accent2); background: var(--bg); }
+    .tl-body h4 { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
     .tl-body p { font-size: 0.87rem; color: var(--muted); font-style: italic; }
-
-    /* ── PROJETS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 1.2rem;
-    }
-
+ 
+    /* ── PROJECT CARDS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+ 
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.8rem;
-      position: relative;
-      overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.8rem; position: relative; overflow: hidden;
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
     }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--blue-dim), transparent);
-      transform: scaleX(0);
-      transition: transform 0.4s;
-    }
-
-    .card:hover {
-      border-color: rgba(91,155,213,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    }
-
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--blue-dim), transparent); transform: scaleX(0); transition: transform 0.4s; }
+    .card:hover { border-color: rgba(91,155,213,0.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
     .card:hover::before { transform: scaleX(1); }
-
-    .card-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
+ 
+    .card-num { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.8rem; }
+    .card-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(232,185,74,0.25); background: rgba(232,185,74,0.06); padding: 0.18rem 0.65rem; margin-bottom: 0.9rem; border-radius: 2px; }
+    .card-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.7rem; }
+    .card-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.65; flex: 1; }
+    .card-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .tool-pill { font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; color: var(--blue); border: 1px solid rgba(91,155,213,0.2); background: rgba(91,155,213,0.06); padding: 0.15rem 0.55rem; border-radius: 2px; }
+ 
+    .card-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
+ 
+    .btn-more {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent); background: transparent;
+      border: 1px solid rgba(232,185,74,0.3); padding: 0.5rem 1.2rem;
+      cursor: pointer; transition: all 0.25s;
+      display: flex; align-items: center; gap: 0.5rem;
     }
-
-    .card-tag {
-      display: inline-block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid rgba(232,185,74,0.25);
-      background: rgba(232,185,74,0.06);
-      padding: 0.18rem 0.65rem;
-      margin-bottom: 0.9rem;
-      border-radius: 2px;
-    }
-
-    .card-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.7rem;
-    }
-
-    .card-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.65; }
-
+    .btn-more:hover { background: rgba(232,185,74,0.1); border-color: var(--accent); }
+    .btn-more svg { width: 12px; height: 12px; transition: transform 0.25s; }
+    .btn-more:hover svg { transform: translateX(3px); }
+ 
     /* ── COMPÉTENCES ── */
-    .skills-cols {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .skill-group h4 {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 1.3rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 1px solid var(--border2);
-    }
-
+    .skills-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 2.5rem; }
+    .skill-group h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.3rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border2); }
     .skill-rows { display: flex; flex-direction: column; gap: 1rem; }
     .skill-row { display: flex; flex-direction: column; gap: 0.35rem; }
-
-    .skill-label {
-      display: flex;
-      justify-content: space-between;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.67rem;
-      letter-spacing: 0.06em;
-      color: var(--text2);
-    }
-
+    .skill-label { display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.06em; color: var(--text2); }
     .skill-label span { color: var(--muted); }
-
     .skill-track { height: 2px; background: var(--border2); overflow: hidden; }
-
-    .skill-prog {
-      height: 100%;
-      background: linear-gradient(to right, var(--blue-dim), var(--accent));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 1.1s cubic-bezier(0.16,1,0.3,1);
-    }
-
+    .skill-prog { height: 100%; background: linear-gradient(to right, var(--blue-dim), var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(0.16,1,0.3,1); }
     .skill-prog.go { transform: scaleX(1); }
-
+ 
     /* ── CONTACT ── */
     .contact-wrap { text-align: center; }
     .contact-wrap .s-rule { margin-left: auto; margin-right: auto; }
-
     .contact-lead { font-size: 1rem; color: var(--text2); font-style: italic; margin-bottom: 2.8rem; }
-
-    .contact-row {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .c-link {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.67rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text2);
-      text-decoration: none;
-      border: 1px solid var(--border2);
-      background: var(--surface);
-      padding: 0.9rem 1.7rem;
-      transition: all 0.25s;
-    }
-
+    .contact-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .c-link { display: flex; align-items: center; gap: 0.65rem; font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text2); text-decoration: none; border: 1px solid var(--border2); background: var(--surface); padding: 0.9rem 1.7rem; transition: all 0.25s; }
     .c-link svg { width: 15px; height: 15px; opacity: 0.6; }
     .c-link:hover { border-color: var(--accent); color: var(--accent); }
-
+ 
     /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 2rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0,0,0,0.2);
-    }
-
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); }
     .ft-name { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--text2); }
     .ft-copy { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
+ 
+    /* ══════════════════════════════
+       MODAL SYSTEM
+    ══════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(10,12,18,0.88);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 2rem 1rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+      overflow-y: auto;
     }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+ 
+    .modal {
+      background: #1a1f2a;
+      border: 1px solid var(--border2);
+      max-width: 860px; width: 100%;
+      position: relative;
+      transform: translateY(40px);
+      transition: transform 0.35s ease;
+      margin: auto;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+ 
+    .modal-header {
+      padding: 2.5rem 3rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+ 
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 36px; height: 36px;
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-size: 1.1rem;
+    }
+    .modal-close:hover { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+ 
+    .modal-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
+    .modal-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; color: var(--text); margin-bottom: 0.8rem; }
+ 
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+    .modal-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(232,185,74,0.25); background: rgba(232,185,74,0.06); padding: 0.2rem 0.7rem; border-radius: 2px; }
+    .modal-tag.blue { color: var(--blue); border-color: rgba(91,155,213,0.25); background: rgba(91,155,213,0.06); }
+ 
+    .modal-body { padding: 2.5rem 3rem; }
+ 
+    .modal-section { margin-bottom: 2.5rem; }
+    .modal-section:last-child { margin-bottom: 0; }
+ 
+    .modal-section-title {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 1rem; padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    .modal-section p { color: var(--text2); font-size: 0.95rem; margin-bottom: 0.8rem; }
+    .modal-section p:last-child { margin-bottom: 0; }
+    .modal-section strong { color: var(--text); font-weight: 500; }
+ 
+    .modal-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .modal-list li { font-size: 0.92rem; color: var(--text2); padding-left: 1.2rem; position: relative; }
+    .modal-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent2); font-size: 0.75rem; }
+ 
+    /* Timeline du projet */
+    .proj-timeline { display: flex; flex-direction: column; gap: 0; }
+    .pt-item { display: grid; grid-template-columns: 110px 1px 1fr; gap: 0 1.2rem; padding-bottom: 1.5rem; }
+    .pt-item:last-child { padding-bottom: 0; }
+    .pt-date { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); text-align: right; padding-top: 2px; line-height: 1.4; }
+    .pt-line { position: relative; background: var(--border2); }
+    .pt-line::before { content: ''; position: absolute; top: 3px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 7px; height: 7px; border: 1px solid var(--accent2); background: #1a1f2a; }
+    .pt-body { padding-top: 0; }
+    .pt-body h5 { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 0.15rem; }
+    .pt-body p { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+ 
+    /* Logiciels grid */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.8rem; }
+    .tool-card { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.2rem; }
+    .tool-card h5 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.3rem; }
+    .tool-card p { font-size: 0.82rem; color: var(--muted); }
+ 
+    /* Résultats modèle */
+    .model-box {
+      background: var(--surface); border: 1px solid rgba(91,155,213,0.2);
+      border-left: 3px solid var(--blue);
+      padding: 1.2rem 1.5rem; margin: 1rem 0;
+      font-family: 'DM Mono', monospace;
+    }
+    .model-box .formula { font-size: 1rem; color: var(--text); margin-bottom: 0.8rem; }
+    .model-box .params { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .model-box .param { font-size: 0.78rem; color: var(--text2); }
+    .model-box .param span { color: var(--accent); }
+ 
+    /* Compétences list in modal */
+    .comp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .comp-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text2); border: 1px solid var(--border2); background: var(--surface); padding: 0.3rem 0.8rem; border-radius: 2px; }
+ 
+    /* Défis */
+    .defi-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .defi-item { background: var(--surface); border: 1px solid var(--border); padding: 0.9rem 1.2rem; }
+    .defi-item h5 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
+    .defi-item p { font-size: 0.88rem; color: var(--text2); }
+ 
+    /* Conclusion box */
+    .conclusion-box { background: var(--surface); border: 1px solid var(--border2); border-left: 3px solid var(--accent); padding: 1.4rem 1.8rem; font-size: 0.95rem; color: var(--text2); font-style: italic; }
+ 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .75s ease,transform .75s ease; }
     .reveal.on { opacity:1; transform:translateY(0); }
-
+ 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       nav { padding: 1.2rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+      .modal-header, .modal-body { padding: 1.5rem; }
     }
-    @media (max-width: 520px) { .nav-links { display: none; } }
+    @media (max-width: 600px) { .nav-links { display: none; } }
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
+ 
   <nav>
     <a href="#accueil" class="nav-logo">Jules <span>Balluais</span></a>
     <ul class="nav-links">
@@ -576,30 +324,22 @@
       <li><a href="#" class="nav-cv">Télécharger CV</a></li>
     </ul>
   </nav>
-
+ 
   <!-- HERO -->
-  <div id="accueil" style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:8rem 2rem 5rem; z-index:1;">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 48%, rgba(91,155,213,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 35% at 20% 85%, rgba(232,185,74,0.05) 0%, transparent 60%);pointer-events:none;"></div>
-
-    <p class="hero-eyebrow">2 0 2 3 &nbsp;—&nbsp; 2 0 2 6</p>
-    <h1 class="hero-title">
-      PORTFOLIO
-      <span class="hero-name-line">Jules &nbsp;<em>Balluais</em></span>
-    </h1>
+  <div id="accueil" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 48%, rgba(91,155,213,0.07) 0%, transparent 70%);pointer-events:none;"></div>
+    <p class="hero-eyebrow">2 0 2 4 &nbsp;—&nbsp; 2 0 2 6</p>
+    <h1 class="hero-title">PORTFOLIO<span class="hero-name-line">Jules &nbsp;<em>Balluais</em></span></h1>
     <div class="hero-rule"></div>
     <p class="hero-sub">Futur diplômé en <strong>BUT Mesures Physiques</strong> à l'IUT de Blois. Spécialisé en instrumentation, métrologie et automatisation.</p>
     <div class="hero-btns">
       <a href="#projets" class="btn btn-primary">Voir mes projets</a>
-      <a href="#contact" class="btn btn-ghost">Stage Comet</a>
+      <a href="#contact" class="btn btn-ghost">Me contacter</a>
     </div>
-
-    <div class="scroll-cue">
-      <span>Découvrir</span>
-      <div class="scroll-cue-line"></div>
-    </div>
+    <div class="scroll-cue"><span>Découvrir</span><div class="scroll-cue-line"></div></div>
   </div>
-
-  <!-- À PROPOS / INFOS -->
+ 
+  <!-- INFOS -->
   <section id="apropos">
     <div class="section-wrap">
       <p class="s-eyebrow reveal">01 — Infos</p>
@@ -608,11 +348,9 @@
       <div class="about-grid">
         <div class="about-text reveal">
           <p>Je m'appelle <strong>Jules Balluais</strong>, étudiant en deuxième année de <strong>BUT Mesures Physiques</strong> à l'IUT de Blois.</p>
-          <p>Mon parcours m'a amené à explorer la physique sous toutes ses facettes : l'<strong>instrumentation</strong>, la <strong>métrologie</strong> et les travaux pratiques expérimentaux.</p>
-          <p>J'aime comprendre comment les phénomènes physiques peuvent être mesurés, analysés et mis en application concrète dans un contexte professionnel ou de recherche.</p>
-          <div style="margin-top:2rem;">
-            <a href="#projets" class="btn btn-primary" style="font-size:0.65rem;">Découvrir mes travaux</a>
-          </div>
+          <p>J'ai réalisé de nombreux travaux pratiques autour de la physique, l'<strong>instrumentation</strong> et la <strong>métrologie</strong>. Ce portfolio présente une sélection de ces projets et les compétences développées.</p>
+          <p>Passionné par l'expérimentation et l'analyse de données, je cherche à mettre mes compétences en pratique dans un contexte professionnel stimulant.</p>
+          <div style="margin-top:2rem;"><a href="#projets" class="btn btn-primary" style="font-size:0.65rem;">Voir mes projets</a></div>
         </div>
         <div class="reveal">
           <div class="info-card">
@@ -621,13 +359,13 @@
             <div class="info-row"><span class="label">École</span><span class="val">IUT de Blois</span></div>
             <div class="info-row"><span class="label">Période</span><span class="val">2024 – 2026</span></div>
             <div class="info-row"><span class="label">Spécialité</span><span class="val">Instrumentation & Métrologie</span></div>
-            <div class="info-row"><span class="label">Disponibilité</span><span class="val">Stage / Alternance</span></div>
+            <div class="info-row"><span class="label">Email</span><span class="val">jules.balluais@gmail.com</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
+ 
   <!-- PARCOURS -->
   <section id="parcours">
     <div class="section-wrap">
@@ -638,7 +376,7 @@
         <div class="tl-item">
           <div class="tl-year">2020<br>2023</div>
           <div class="tl-line"></div>
-          <div class="tl-body"><h4>Lycée Balzac</h4><p>Tours Centre — Baccalauréat</p></div>
+          <div class="tl-body"><h4>Lycée Balzac — Tours Centre</h4><p>Baccalauréat</p></div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2023<br>2024</div>
@@ -653,7 +391,7 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- PROJETS -->
   <section id="projets">
     <div class="section-wrap">
@@ -661,40 +399,108 @@
       <h2 class="s-title reveal">Mes travaux</h2>
       <div class="s-rule reveal"></div>
       <div class="projects-grid">
+ 
+        <!-- PROJET 1 -->
         <div class="card reveal">
-          <p class="card-num">Projet 01</p>
-          <span class="card-tag">1ère Année</span>
-          <h3 class="card-title">Projet Universitaire 1</h3>
-          <p class="card-desc">Premier projet universitaire en BUT Mesures Physiques. Travaux pratiques autour des mesures et de l'analyse des données expérimentales.</p>
+          <p class="card-num">Projet 01 · 1ère Année</p>
+          <span class="card-tag">Instrumentation</span>
+          <h3 class="card-title">Oscillation d'un Pendule</h3>
+          <p class="card-desc">Étude du mouvement d'un pendule simple via Phyphox. Modélisation par sinusoïde amortie et analyse des données gyroscopiques.</p>
+          <div class="card-tools">
+            <span class="tool-pill">Phyphox</span>
+            <span class="tool-pill">Excel</span>
+            <span class="tool-pill">Mindview</span>
+            <span class="tool-pill">GoogleDoc</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn-more" onclick="openModal('pendule')">
+              En savoir plus
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
+ 
+        <!-- PROJET 2 -->
         <div class="card reveal">
-          <p class="card-num">Projet 02</p>
-          <span class="card-tag">1ère Année</span>
-          <h3 class="card-title">Projet Universitaire 2</h3>
-          <p class="card-desc">Approfondissement des techniques de mesure et d'instrumentation. Mise en pratique des concepts théoriques en laboratoire.</p>
+          <p class="card-num">Projet 02 · 1ère Année</p>
+          <span class="card-tag">Acoustique</span>
+          <h3 class="card-title">Propagation des Ultrasons dans le vide</h3>
+          <p class="card-desc">Étude de la propagation des ultrasons dans différents milieux. Analyse expérimentale des caractéristiques de transmission.</p>
+          <div class="card-tools">
+            <span class="tool-pill">Instrumentation</span>
+            <span class="tool-pill">Acquisition de données</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn-more" onclick="openModal('ultrasons')">
+              En savoir plus
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
+ 
+        <!-- PROJET 3 -->
         <div class="card reveal">
-          <p class="card-num">Projet 03</p>
-          <span class="card-tag">2ème Année</span>
-          <h3 class="card-title">Projet Universitaire 3</h3>
-          <p class="card-desc">Projet de deuxième année intégrant des problématiques avancées en métrologie et traitement du signal physique.</p>
+          <p class="card-num">Projet 03 · 2ème Année</p>
+          <span class="card-tag">Chimie & Électronique</span>
+          <h3 class="card-title">Concevoir un Spectromètre</h3>
+          <p class="card-desc">Conception d'un spectromètre connecté pour le dosage des nitrites dans la Loire. Chaîne optique LED/TSL2591, loi de Beer-Lambert, programmation Arduino.</p>
+          <div class="card-tools">
+            <span class="tool-pill">Arduino IDE</span>
+            <span class="tool-pill">Excel</span>
+            <span class="tool-pill">GoogleWord</span>
+            <span class="tool-pill">Mindview</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn-more" onclick="openModal('spectro')">
+              En savoir plus
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
+ 
+        <!-- STAGE -->
         <div class="card reveal">
-          <p class="card-num">Projet 04</p>
-          <span class="card-tag">Stage</span>
-          <h3 class="card-title">Stage Professionnel</h3>
-          <p class="card-desc">Immersion en milieu professionnel. Application des compétences acquises dans un contexte réel d'entreprise ou de laboratoire.</p>
+          <p class="card-num">Projet 04 · Stage · 2026</p>
+          <span class="card-tag">Comet Traitements — Belgique</span>
+          <h3 class="card-title">Machine IA de Reconnaissance des Métaux</h3>
+          <p class="card-desc">Développement d'un protocole de préparation d'échantillons et d'un cahier des charges pour une machine IA de reconnaissance des métaux, en collaboration avec Eagle Vizion (Canada).</p>
+          <div class="card-tools">
+            <span class="tool-pill">Eagle Vizion</span>
+            <span class="tool-pill">Métrologie</span>
+            <span class="tool-pill">Machine Learning</span>
+            <span class="tool-pill">Cahier des Charges</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn-more" onclick="openModal('stage')">
+              En savoir plus
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
+ 
+        <!-- ATELIER RADIO -->
         <div class="card reveal">
-          <p class="card-num">Projet 05</p>
-          <span class="card-tag">Atelier</span>
-          <h3 class="card-title">Atelier Radio</h3>
-          <p class="card-desc">Projet créatif autour des technologies radio. Exploration des ondes, de la transmission et des systèmes de communication.</p>
+          <p class="card-num">Projet 05 · Atelier</p>
+          <span class="card-tag">Radio Campus Tours</span>
+          <h3 class="card-title">Projet Atelier Radio</h3>
+          <p class="card-desc">Émission de 15 minutes en partenariat avec Radio Campus Tours 99.5. Scénarisation, argumentation contradictoire et passage en studio en conditions réelles.</p>
+          <div class="card-tools">
+            <span class="tool-pill">Radio Campus Tours</span>
+            <span class="tool-pill">GoogleWord</span>
+            <span class="tool-pill">Instagram</span>
+          </div>
+          <div class="card-footer">
+            <button class="btn-more" onclick="openModal('radio')">
+              En savoir plus
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
+ 
       </div>
     </div>
   </section>
-
+ 
   <!-- COMPÉTENCES -->
   <section id="competences">
     <div class="section-wrap">
@@ -709,14 +515,16 @@
             <div class="skill-row"><div class="skill-label">Instrumentation <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.78"></div></div></div>
             <div class="skill-row"><div class="skill-label">Physique expérimentale <span>Avancé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.82"></div></div></div>
             <div class="skill-row"><div class="skill-label">Traitement du signal <span>Intermédiaire</span></div><div class="skill-track"><div class="skill-prog" data-w="0.62"></div></div></div>
+            <div class="skill-row"><div class="skill-label">Acquisition de données <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.76"></div></div></div>
           </div>
         </div>
         <div class="skill-group reveal">
-          <h4>Analyse & Outils</h4>
+          <h4>Logiciels & Outils</h4>
           <div class="skill-rows">
-            <div class="skill-row"><div class="skill-label">Analyse de données <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.74"></div></div></div>
+            <div class="skill-row"><div class="skill-label">Excel <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.80"></div></div></div>
+            <div class="skill-row"><div class="skill-label">Phyphox <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.75"></div></div></div>
             <div class="skill-row"><div class="skill-label">Rédaction de rapports <span>Avancé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.88"></div></div></div>
-            <div class="skill-row"><div class="skill-label">Excel / Tableurs <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.72"></div></div></div>
+            <div class="skill-row"><div class="skill-label">Mindview (Gantt) <span>Intermédiaire</span></div><div class="skill-track"><div class="skill-prog" data-w="0.65"></div></div></div>
             <div class="skill-row"><div class="skill-label">Python (bases) <span>Débutant</span></div><div class="skill-track"><div class="skill-prog" data-w="0.42"></div></div></div>
           </div>
         </div>
@@ -726,13 +534,13 @@
             <div class="skill-row"><div class="skill-label">Rigueur scientifique <span>Avancé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.9"></div></div></div>
             <div class="skill-row"><div class="skill-label">Travail en équipe <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.8"></div></div></div>
             <div class="skill-row"><div class="skill-label">Autonomie <span>Confirmé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.76"></div></div></div>
-            <div class="skill-row"><div class="skill-label">Adaptabilité <span>Avancé</span></div><div class="skill-track"><div class="skill-prog" data-w="0.83"></div></div></div>
+            <div class="skill-row"><div class="skill-label">Anglais rédactionnel <span>Intermédiaire</span></div><div class="skill-track"><div class="skill-prog" data-w="0.68"></div></div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
+ 
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-wrap contact-wrap">
@@ -741,11 +549,11 @@
       <div class="s-rule reveal"></div>
       <p class="contact-lead reveal">N'hésitez pas à me contacter pour toute question ou opportunité.</p>
       <div class="contact-row reveal">
-        <a href="mailto:jules.balluais@exemple.com" class="c-link">
+        <a href="mailto:jules.balluais@gmail.com" class="c-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          Email
+          jules.balluais@gmail.com
         </a>
-        <a href="https://www.linkedin.com/in/" target="_blank" class="c-link">
+        <a href="https://www.linkedin.com/in/jules-balluais-b6b4a1338" target="_blank" class="c-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn
         </a>
@@ -756,24 +564,770 @@
       </div>
     </div>
   </section>
-
+ 
   <footer>
     <span class="ft-name">Jules Balluais</span>
     <span class="ft-copy">© 2025 — BUT Mesures Physiques · IUT de Blois</span>
   </footer>
-
+ 
+  <!-- ══════════════════════════════
+       MODAL — OSCILLATION DU PENDULE
+  ══════════════════════════════ -->
+  <div class="modal-overlay" id="modal-pendule" onclick="closeModalOnOverlay(event, 'pendule')">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal('pendule')">✕</button>
+        <p class="modal-eyebrow">Projet 01 · 1ère Année · 2024–2025</p>
+        <h2 class="modal-title">Oscillation d'un Pendule</h2>
+        <div class="modal-tags">
+          <span class="modal-tag">Instrumentation</span>
+          <span class="modal-tag">Modélisation</span>
+          <span class="modal-tag blue">Phyphox</span>
+          <span class="modal-tag blue">Excel</span>
+        </div>
+      </div>
+      <div class="modal-body">
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Objectif</p>
+          <ul class="modal-list">
+            <li>Étudier le mouvement d'un pendule simple en enregistrant les vitesses angulaires autour des trois axes à l'aide de l'application Phyphox</li>
+            <li>Analyser le comportement dynamique et traiter les données issues de plusieurs oscillations</li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Timeline du projet</p>
+          <div class="proj-timeline">
+            <div class="pt-item">
+              <div class="pt-date">Avril 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Étude théorique</h5><p>Étude théorique d'une oscillation d'un pendule</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Mai 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Création d'un Gantt</h5><p>Planification du projet avec Mindview</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Début Juin 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Prise de mesure (Test)</h5><p>Expériences avec le pendule et Phyphox</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Mi-Juin 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Exploitation des données</h5><p>Traitement des données Phyphox dans Excel</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Fin Juin 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Compte-rendu en anglais</h5><p>Rédaction du rapport final sur Google Doc</p></div>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Matériel utilisé</p>
+          <ul class="modal-list">
+            <li>Tube en carton et ficelle (≥ 1 mètre)</li>
+            <li>Téléphone avec l'application Phyphox</li>
+            <li>Support pour suspendre le pendule</li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Logiciels utilisés</p>
+          <div class="tools-grid">
+            <div class="tool-card"><h5>Phyphox</h5><p>Acquisition des données gyroscopiques</p></div>
+            <div class="tool-card"><h5>Excel</h5><p>Traitement des données & modélisation</p></div>
+            <div class="tool-card"><h5>Mindview</h5><p>Planification Gantt</p></div>
+            <div class="tool-card"><h5>GoogleDoc</h5><p>Compte-rendu final en anglais</p></div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Résultats expérimentaux</p>
+          <p>En testant le module gyroscopique avant l'expérience, nous savions que la rotation autour de l'axe z serait celle impliquée dans le pendule. Cela a été confirmé en examinant les données : l'axe z présentait la plus grande amplitude.</p>
+          <p>Nous avons utilisé les données issues de la troisième expérience, qui présentait le graphique le plus clair, réduites à 10 oscillations depuis un point proche de 0.</p>
+          <div class="model-box">
+            <div class="formula">Modèle : ω(t) = K·e<sup>−αt</sup>·sin(ωt + φ)</div>
+            <div class="params">
+              <span class="param">K = <span>0.609</span></span>
+              <span class="param">α = <span>0.0256</span></span>
+              <span class="param">ω = <span>3.56 rad/sec</span></span>
+              <span class="param">φ = <span>0</span></span>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Analyse des résultats</p>
+          <p>La sinusoïde amortie est un très bon modèle pour la vitesse angulaire d'un pendule. La valeur expérimentale ω = 3.56 rad/sec est proche de la formule théorique pour ω qui donne 3.67 ± 0.13 rad/sec, et la différence est inférieure à l'incertitude de mesure.</p>
+          <p>La longueur entre le support et le centre du téléphone était de 73 cm, cette mesure n'étant pas totalement précise car nous ne disposions pas d'un mètre ruban approprié.</p>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Défis relevés</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>Méthode</h5>
+              <p>Nous avons d'abord essayé sans le tube en papier, mais le nœud n'était pas assez serré — le téléphone oscillait sur plusieurs axes.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Organisation</h5>
+              <p>Le diagramme de Gantt nous a demandé plus d'efforts et de temps que prévu.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Données</h5>
+              <p>Les calculs Excel semblaient erronés pour l'intégrale. Comme discuté avec M. BRUN, l'intégrale est correcte lorsqu'on utilise Python, et le processus pour l'obtenir est également correct.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Compétences développées</p>
+          <div class="comp-tags">
+            <span class="comp-tag">Acquisition de données expérimentales</span>
+            <span class="comp-tag">Traitement de données</span>
+            <span class="comp-tag">Modélisation physique</span>
+            <span class="comp-tag">Estimation des incertitudes</span>
+            <span class="comp-tag">Outils numériques</span>
+            <span class="comp-tag">Travail en équipe</span>
+            <span class="comp-tag">Anglais rédactionnel</span>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Conclusion</p>
+          <div class="conclusion-box">
+            À l'aide d'équipements faciles à trouver et d'un téléphone, nous avons étudié la vitesse d'un pendule. Nous avons pu le modéliser avec une fonction sinusoïdale amortie d'une excellente précision. De plus, nous avons confirmé la formule donnée pour la fréquence angulaire du pendule, qui équivaut à la formule de sa période.
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+ 
+  <!-- MODAL — ULTRASONS -->
+  <div class="modal-overlay" id="modal-ultrasons" onclick="closeModalOnOverlay(event, 'ultrasons')">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal('ultrasons')">✕</button>
+        <p class="modal-eyebrow">Projet 02 · 1ère Année · 2024–2025</p>
+        <h2 class="modal-title">Propagation des Ultrasons dans le vide</h2>
+        <div class="modal-tags">
+          <span class="modal-tag">Équipe</span>
+          <span class="modal-tag">Électronique</span>
+          <span class="modal-tag blue">Ultrason</span>
+          <span class="modal-tag blue">Kicad</span>
+        </div>
+      </div>
+      <div class="modal-body">
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Objectif</p>
+          <ul class="modal-list">
+            <li>Étudier la propagation des ultrasons sous vide</li>
+            <li>Analyser l'évolution du signal dans le vide</li>
+            <li>Répondre à la problématique : <strong>Comment les ultrasons se propagent-ils dans le vide ?</strong></li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Timeline du projet</p>
+          <div class="proj-timeline">
+            <div class="pt-item">
+              <div class="pt-date">Avril 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Étude théorique</h5><p>Étude théorique sur la propagation des ultrasons dans le vide</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Mai 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Choix des capteurs</h5><p>Sélection des capteurs ultrasonores MA40S4S et MA40S4R</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Début Juin 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Montage depuis le support</h5><p>Conception et assemblage du support métallique dans la cuve à vide</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Mi-Juin 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Tests</h5><p>Mesures de l'amplitude du signal en fonction de la pression</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Fin Juin 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Présentation orale</h5><p>Présentation des résultats via Canva</p></div>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Matériel utilisé</p>
+          <ul class="modal-list">
+            <li><strong>Capteurs ultrasonores</strong> — MA40S4S : émetteur 40 kHz / MA40S4R : récepteur 40 kHz</li>
+            <li><strong>Support de montage</strong> — Support métallique rigide en aluminium, fixation par vis inox, maintenant les deux capteurs alignés face à face</li>
+            <li><strong>Connexion</strong> — Fils monobrins, platine d'amplification et câblage interne</li>
+            <li><strong>Instruments</strong> — GBF (40 kHz), alimentation DC ±12V, oscilloscope, multimètre numérique</li>
+            <li><strong>Environnement de test</strong> — Cuve à vide hermétique (rayon ≈ 6 cm) + pompe à vide jusqu'à −1 bar</li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Description de l'expérience</p>
+          <p>Pour mesurer la propagation des ultrasons dans une machine à vide, un support métallique intégrant les deux capteurs (émetteur MA40S4S et récepteur MA40S4R) a été assemblé. Les capteurs ont été soudés à l'aide d'étain et protégés par des gaines pour assurer solidité et étanchéité. Le support a été fixé à l'intérieur d'un cylindre métallique inséré dans la cuve à vide.</p>
+          <p>Les fils des capteurs ont été connectés à une plaque de prototypage reliée à l'extérieur de la cuve, puis aux instruments de mesure. En diminuant progressivement la pression, nous avons observé sur l'oscilloscope l'évolution du signal ultrasonore en fonction du niveau de vide.</p>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Logiciels utilisés</p>
+          <div class="tools-grid">
+            <div class="tool-card"><h5>Canva</h5><p>Présentation du projet en oral</p></div>
+            <div class="tool-card"><h5>Kicad</h5><p>Schématisation du circuit électronique</p></div>
+            <div class="tool-card"><h5>Mail</h5><p>Organisation et suivi du projet</p></div>
+            <div class="tool-card"><h5>Word</h5><p>Rédaction du compte-rendu</p></div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Résultats expérimentaux</p>
+          <p>La pression atmosphérique normale est d'environ 1 bar. Lorsque la pression relative atteint −1 bar, la pression absolue devient proche de 0 bar, correspondant à un vide quasi complet. Dans ces conditions, la transmission des ultrasons devient théoriquement impossible faute de milieu de propagation.</p>
+          <div class="model-box">
+            <div class="formula" style="font-size:0.85rem;margin-bottom:0.8rem;">Amplitude mesurée en fonction de la pression</div>
+            <div class="params" style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;">
+              <span class="param" style="text-align:center;"><span>−1 bar</span><br>0 V</span>
+              <span class="param" style="text-align:center;"><span>−0.8</span><br>0.76 V</span>
+              <span class="param" style="text-align:center;"><span>−0.6</span><br>1.78 V</span>
+              <span class="param" style="text-align:center;"><span>−0.4</span><br>2.8 V</span>
+              <span class="param" style="text-align:center;"><span>−0.1</span><br>4.08 V</span>
+            </div>
+          </div>
+          <p style="margin-top:1rem;">Cette courbe montre de façon nette que <strong>la propagation de l'onde ultrasonore dépend directement de la pression</strong>.</p>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Analyse et discussion</p>
+          <p>La propagation des ultrasons dépend de la présence d'un milieu matériel, car il s'agit d'une onde mécanique. Les mesures montrent une diminution progressive de l'amplitude du signal lorsque la pression diminue : forte à pression atmosphérique (~4.6 V), elle tend vers zéro à mesure que le vide s'installe.</p>
+          <p>D'après la loi des gaz parfaits (PV = nRT), la baisse de pression réduit le nombre de particules disponibles pour propager l'onde, expliquant ainsi la disparition du signal lorsque la pression atteint −1 bar. Malgré quelques pertes et réflexions possibles, les résultats valident l'hypothèse.</p>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Compétences développées</p>
+          <div class="comp-tags">
+            <span class="comp-tag">Maîtrise de montage</span>
+            <span class="comp-tag">Compréhension des ondes mécaniques</span>
+            <span class="comp-tag">Travail en groupe & répartition des tâches</span>
+            <span class="comp-tag">Oscilloscope & GBF</span>
+            <span class="comp-tag">Rigueur scientifique</span>
+            <span class="comp-tag">Schématisation (Kicad)</span>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Conclusion</p>
+          <div class="conclusion-box">
+            L'objectif de ce projet était d'étudier la propagation des ultrasons dans un milieu soumis à une pression décroissante jusqu'à un vide relatif. À l'aide d'une cuve à vide, un émetteur et un récepteur ultrasonores ont été alignés afin de mesurer l'amplitude du signal en fonction de la pression. Les résultats montrent une baisse progressive du signal jusqu'à son annulation vers −1 bar, confirmant que les ultrasons, ondes mécaniques, nécessitent un milieu matériel pour se propager. L'équation des gaz parfaits (PV = nRT) soutient cette observation. L'expérience valide l'hypothèse et illustre clairement la dépendance des ondes mécaniques à la présence d'un milieu.
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Annexes</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>Compte-rendu Word (PDF)</h5>
+              <p><a href="https://drive.google.com/file/d/1BDVKfy00w7Ymc56TeQRR3P4g7tK-RNOJ/view?usp=sharing" target="_blank" style="color:var(--blue);font-family:'DM Mono',monospace;font-size:0.75rem;">Ouvrir le document →</a></p>
+            </div>
+            <div class="defi-item">
+              <h5>Présentation orale (Canva)</h5>
+              <p><a href="https://www.canva.com/design/DAGp3SK0KXo/xpEBDqvMLd9LOg0J7aZSJA/edit" target="_blank" style="color:var(--blue);font-family:'DM Mono',monospace;font-size:0.75rem;">Ouvrir la présentation →</a></p>
+            </div>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+ 
+  <!-- MODAL — SPECTROMÈTRE -->
+  <div class="modal-overlay" id="modal-spectro" onclick="closeModalOnOverlay(event, 'spectro')">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal('spectro')">✕</button>
+        <p class="modal-eyebrow">Projet 03 · 2ème Année · 2025–2026</p>
+        <h2 class="modal-title">Concevoir un Spectromètre</h2>
+        <div class="modal-tags">
+          <span class="modal-tag">Équipe</span>
+          <span class="modal-tag">Chimie</span>
+          <span class="modal-tag blue">Électronique</span>
+          <span class="modal-tag blue">Arduino</span>
+        </div>
+      </div>
+      <div class="modal-body">
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Objectif</p>
+          <ul class="modal-list">
+            <li>Conception d'un instrument de mesure optique pour doser les nitrites dans la Loire</li>
+            <li>Transversalité scientifique et technique (optique, chimie, électronique)</li>
+            <li>Maîtrise de la métrologie et de la loi de Beer-Lambert</li>
+            <li>Gestion de projet en autonomie</li>
+            <li>Communication professionnelle et technique (notice en anglais)</li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Timeline du projet</p>
+          <div class="proj-timeline">
+            <div class="pt-item">
+              <div class="pt-date">Sept. 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Connaissance du projet</h5><p>Prise en main du cahier des charges et recherche bibliographique</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Oct. 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Début de conception</h5><p>Choix des capteurs et des composants techniques</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Nov.–Déc. 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Conception</h5><p>Développement du prototype électronique, mécanique et chimique</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Jan. 2026</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Tests et métrologie</h5><p>Tests de répétabilité, linéarité, sensibilité et étanchéité optique</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Fin Jan. 2026</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Évaluation du prototype</h5><p>Validation métrologique et ajustements</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Début Avril 2026</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Évaluation du prototype final</h5><p>Rendu final et présentation du spectromètre abouti</p></div>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Principe Optique</p>
+          <p>L'objectif est de mesurer l'absorbance du complexe coloré rose (réactif de Griess) dont le pic d'absorption se situe dans les longueurs d'onde vertes. La loi de Beer-Lambert relie l'absorbance à la concentration :</p>
+          <div class="model-box">
+            <div class="formula">A = −log(I / I₀) = ε · l · C</div>
+            <div class="params">
+              <span class="param">Source : <span>LED verte λ = 525 nm</span></span>
+              <span class="param">Trajet optique : <span>l = 1 cm</span></span>
+              <span class="param">Capteur : <span>Photodétecteur TSL2591</span></span>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Description de la conception</p>
+          <ul class="modal-list">
+            <li><strong>Principe Électronique</strong> — Capteur TSL2591 (ADC 16 bits, communication I2C), LED pilotée par une sortie régulée de l'Arduino. Résolution de 0.0001 unité d'absorbance sur 65 536 niveaux.</li>
+            <li><strong>Principe Mécanique</strong> — Enceinte opaque assurant une isolation optique de 97 %. Le puits de cuve maintient LED et capteur dans un axe rigoureusement identique.</li>
+            <li><strong>Principe Chimique</strong> — Dosage des nitrites dans la Loire. Solution mère 100 mg/L, 5 étalons de 0,05 à 2 mg/L. Ajout de 1 mL de réactif de Griess, 15 min de réaction, puis lecture de l'absorbance.</li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Cahier des charges</p>
+          <div class="tools-grid">
+            <div class="tool-card"><h5>Résolution</h5><p>0,0001 unité d'absorbance</p></div>
+            <div class="tool-card"><h5>Gamme de mesure</h5><p>0,05 à 2 mg/L de nitrites</p></div>
+            <div class="tool-card"><h5>Incertitude cible</h5><p>Inférieure à 5 % sur toute la gamme</p></div>
+            <div class="tool-card"><h5>Conditions</h5><p>Mesure en enceinte fermée, isolation optique totale</p></div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Logiciels utilisés</p>
+          <div class="tools-grid">
+            <div class="tool-card"><h5>Arduino IDE</h5><p>Programmation du capteur TSL2591</p></div>
+            <div class="tool-card"><h5>GoogleWord</h5><p>Rédaction du compte-rendu final</p></div>
+            <div class="tool-card"><h5>Excel</h5><p>Traitement des données & courbe d'étalonnage</p></div>
+            <div class="tool-card"><h5>Mindview</h5><p>Planification Gantt</p></div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Tests de métrologie</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>Répétabilité (Fidélité)</h5>
+              <p>Critère de fidelité de 1 % validé pour l'intensité lumineuse (0,28 %). Répétabilité sur l'absorbance : <strong>0,73 %</strong>.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Linéarité (Beer-Lambert)</h5>
+              <p>Coefficient de détermination <strong>R² ≈ 0,998</strong>. La linéarité valide le principe dès 0,04 mg/L.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Sensibilité</h5>
+              <p>Seuil de détection : 0,0015 unité d'absorbance. Détection des nitrites à partir de <strong>0,01 mg/L</strong>.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Étanchéité optique</h5>
+              <p>Chute de <strong>97 %</strong> de la lumière parasite — l'enceinte opaque est indispensable.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Tests statistiques</h5>
+              <p>Durbin-Watson DW = 2,50 (résidus indépendants) · Shapiro-Wilk p = 0,607 (normalité validée) · Grubbs G &lt; 1,887 (aucune valeur aberrante) · Breusch-Pagan p = 0,45 (variance constante).</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Compétences développées</p>
+          <div class="comp-tags">
+            <span class="comp-tag">Acquisition & traitement de données</span>
+            <span class="comp-tag">Droite d'étalonnage (Beer-Lambert)</span>
+            <span class="comp-tag">Chaîne d'acquisition LED / TSL2591</span>
+            <span class="comp-tag">Estimation des incertitudes</span>
+            <span class="comp-tag">Programmation Arduino</span>
+            <span class="comp-tag">Travail en équipe</span>
+            <span class="comp-tag">Anglais rédactionnel (Notice)</span>
+            <span class="comp-tag">Tests statistiques métrologie</span>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Conclusion</p>
+          <div class="conclusion-box">
+            Ce spectromètre valide avec succès le dosage des nitrites dans la Loire. Avec une isolation optique de 97 %, l'instrument atteint une linéarité de R² = 0,998 et une limite de détection de 0,01 mg/L. Les tests de Shapiro-Wilk (p = 0,607) et de Grubbs confirment la fiabilité statistique des mesures, garantissant une incertitude maîtrisée de ± 0,06 mg/L.
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Annexes</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>Affiche du Projet (Canva)</h5>
+              <p><a href="https://canva.link/j5h81q9txvyj3g3" target="_blank" style="color:var(--blue);font-family:'DM Mono',monospace;font-size:0.75rem;">Ouvrir l'affiche →</a></p>
+            </div>
+            <div class="defi-item">
+              <h5>Mode d'emploi en anglais</h5>
+              <p style="color:var(--muted);font-family:'DM Mono',monospace;font-size:0.75rem;">Lien à venir…</p>
+            </div>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+ 
+  <!-- MODAL — ATELIER RADIO -->
+  <div class="modal-overlay" id="modal-radio" onclick="closeModalOnOverlay(event, 'radio')">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal('radio')">✕</button>
+        <p class="modal-eyebrow">Projet 05 · Atelier · 2025–2026</p>
+        <h2 class="modal-title">Projet Atelier Radio</h2>
+        <div class="modal-tags">
+          <span class="modal-tag">Communication</span>
+          <span class="modal-tag">Médias</span>
+          <span class="modal-tag blue">Radio Campus Tours 99.5</span>
+        </div>
+      </div>
+      <div class="modal-body">
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Objectif</p>
+          <ul class="modal-list">
+            <li>Maîtrise de la communication médiatique en conditions réelles</li>
+            <li>Scénarisation et construction d'un conducteur radio</li>
+            <li>Développement de l'argumentation contradictoire</li>
+            <li>Esprit de synthèse et médiation</li>
+            <li>Travail collaboratif et répartition des rôles</li>
+          </ul>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Timeline du projet</p>
+          <div class="proj-timeline">
+            <div class="pt-item">
+              <div class="pt-date">Nov. 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Connaissance du projet</h5><p>Prise en main du sujet et recherche bibliographique</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Déc. 2025</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Première présentation</h5><p>Premier passage devant le jury avec le conducteur radio</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Jan. 2026</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Amélioration & présentation évaluée</h5><p>Révision du script et évaluation formelle mi-janvier</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Fin Jan. 2026</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Passage en studio radio</h5><p>Enregistrement de l'émission de 15 min en conditions de direct à Radio Campus Tours</p></div>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Explication du projet</p>
+          <p>Ce projet a été réalisé dans le cadre d'un atelier médiatique en partenariat avec <strong>Radio Campus Tours</strong>. L'objectif central était de s'immerger dans l'univers de la communication radiophonique en produisant une émission de <strong>15 minutes</strong>, de la phase de conception à l'enregistrement en studio dans les conditions du direct.</p>
+          <p>Le travail a nécessité trois étapes :</p>
+          <div class="defi-list" style="margin-top:1rem;">
+            <div class="defi-item">
+              <h5>Recherche et documentation</h5>
+              <p>Travail d'investigation sur une problématique afin de transformer des données académiques en un contenu accessible au grand public.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Scénarisation</h5>
+              <p>Élaboration d'un script structuré permettant de rythmer l'émission, de répartir les temps de parole et de prévoir les relances pour maintenir une dynamique d'écoute.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Mise en situation médiatique</h5>
+              <p>En tant qu'intervenant, maîtrise du débit de parole, de l'intonation et de la capacité d'écoute pour interagir de manière fluide avec les collaborateurs.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Logiciels & outils utilisés</p>
+          <div class="tools-grid">
+            <div class="tool-card"><h5>Instagram</h5><p>Communication autour du projet</p></div>
+            <div class="tool-card"><h5>GoogleWord</h5><p>Compte-rendu final de nos parties</p></div>
+            <div class="tool-card"><h5>Mail</h5><p>Échange d'avancement avec l'équipe</p></div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Compétences développées</p>
+          <p style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--blue);text-transform:uppercase;margin-bottom:0.7rem;">Communication</p>
+          <div class="comp-tags" style="margin-bottom:1.2rem;">
+            <span class="comp-tag">Expression orale en public</span>
+            <span class="comp-tag">Réactivité et interaction</span>
+            <span class="comp-tag">Adaptation au format radio</span>
+          </div>
+          <p style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--blue);text-transform:uppercase;margin-bottom:0.7rem;">Argumentation & Analyse</p>
+          <div class="comp-tags">
+            <span class="comp-tag">Construction d'un plaidoyer nuancé</span>
+            <span class="comp-tag">Utilisation de preuves & données</span>
+            <span class="comp-tag">Synthèse et esprit critique</span>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Conclusion</p>
+          <div class="conclusion-box">
+            Au-delà de la thématique choisie, cet atelier visait à savoir confronter des points de vue opposés, argumenter sous la pression du direct et savoir synthétiser des enjeux globaux. Il s'agissait de comprendre comment l'information est construite, structurée et diffusée sur les ondes. Cette expérience m'a permis d'acquérir une aisance orale et une meilleure compréhension des formats de communication journalistique, tout en respectant les contraintes professionnelles (temps, ligne éditoriale, qualité sonore).
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Annexes — Équipe : J.Balluais · A.Moubine · A.Amzighe</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>Site Radio Campus Tours</h5>
+              <p><a href="https://www.radiocampustours.com" target="_blank" style="color:var(--blue);font-family:'DM Mono',monospace;font-size:0.75rem;">www.radiocampustours.com →</a></p>
+            </div>
+            <div class="defi-item">
+              <h5>Notre émission — Podcast en ligne</h5>
+              <p><a href="https://www.radiocampustours.com/emissions/questions-dactu-le-podcast-des-but2-mesures-physiques-de-liut-de-blois-3/" target="_blank" style="color:var(--blue);font-family:'DM Mono',monospace;font-size:0.75rem;">Écouter le podcast →</a></p>
+            </div>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+ 
+  <!-- MODAL — STAGE COMET TRAITEMENTS -->
+  <div class="modal-overlay" id="modal-stage" onclick="closeModalOnOverlay(event, 'stage')">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal('stage')">✕</button>
+        <p class="modal-eyebrow">Stage Professionnel · 51 jours · 2026 · Belgique</p>
+        <h2 class="modal-title">Machine IA de Reconnaissance des Métaux</h2>
+        <div class="modal-tags">
+          <span class="modal-tag">Comet Traitements</span>
+          <span class="modal-tag blue">Eagle Vizion (Canada)</span>
+          <span class="modal-tag">Métrologie</span>
+          <span class="modal-tag blue">Machine Learning</span>
+        </div>
+      </div>
+      <div class="modal-body">
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Contexte & Objectif</p>
+          <p>Stage réalisé chez <strong>Comet Traitements</strong> en Belgique, filiale du groupe GroupComet spécialisée dans le tri et l'analyse de métaux. Le groupe possède déjà une machine d'analyse IA pour les plastiques (reconnaissance NIR + aspect) et souhaite développer l'équivalent pour les métaux.</p>
+          <p>Mon objectif principal : définir le protocole de préparation des échantillons et rédiger les cahiers des charges pour une future machine de reconnaissance des métaux par IA, en collaboration avec le partenaire canadien <strong>Eagle Vizion</strong> et leur technologie <em>Flake Analyzer</em>.</p>
+          <div class="model-box">
+            <div class="formula" style="font-size:0.82rem;margin-bottom:0.6rem;">Objectif : Remplacer l'expertise visuelle humaine</div>
+            <div class="params">
+              <span class="param">Précision cible : <span>≤ 5 % d'erreur massique</span></span>
+              <span class="param">Capacité : <span>Lots de 10 kg</span></span>
+              <span class="param">Métaux visés : <span>Cu, Laiton, Alu, PCB, Câbles, Déchets</span></span>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Planning du stage (51 jours)</p>
+          <div class="proj-timeline">
+            <div class="pt-item">
+              <div class="pt-date">Phase I</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Audit des échantillons (11 jours)</h5><p>MultiPick, recensement des polluants, phase de tests de préparation (bétonnière, sable, vinaigre), logigramme de décision</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Phase II</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Cahiers des charges initiaux (8 jours)</h5><p>CdC Commercial et CdC Laboratoire (protocole standardisé, environnement optique, sécurité)</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Phase III</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Collaboration Eagle Vizion (12 jours)</h5><p>Préparation et envoi des lots au Canada, suivi des tests en visioconférence, labeling IA</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Phase IV</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Analyse des résultats (3 jours)</h5><p>Corrélation préparation / détection, feedback technique, validation des protocoles</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Phase V</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Cahiers des charges Machine (6 jours)</h5><p>CdC Machine d'Analyse (labo) + Option Éjection (tri industriel)</p></div>
+            </div>
+            <div class="pt-item">
+              <div class="pt-date">Phase VI</div>
+              <div class="pt-line"></div>
+              <div class="pt-body"><h5>Soutenance (12 jours)</h5><p>Portfolio, description en anglais, rapport métrologique de stage</p></div>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Ingénierie du Protocole de Préparation</p>
+          <p>La précision de l'IA dépend directement de la propreté de surface des métaux. J'ai développé un <strong>logigramme de décision</strong> adaptatif selon la granulométrie et l'état d'oxydation de chaque lot.</p>
+          <div class="tools-grid">
+            <div class="tool-card"><h5>Fractions 10–50 mm</h5><p>Bétonnière + sable gros (0,6–1,2 mm) · Gros crible · Soufflette</p></div>
+            <div class="tool-card"><h5>Fractions 0–10 mm</h5><p>Bétonnière + sable fin (0,2–0,5 mm) · Tamis fin · Option vinaigre si oxydation sévère</p></div>
+            <div class="tool-card"><h5>Lot spécial 0–20 mm</h5><p>Bétonnière → Grand crible → Reconstitution des fractions → Petit crible</p></div>
+            <div class="tool-card"><h5>Niveaux de propreté</h5><p>Brut · Mécanique · Optimal (sable) · Référence (vinaigre/acide acétique)</p></div>
+          </div>
+          <p style="margin-top:1rem;">Résultat clé : l'auto-attrition à sec seule est insuffisante. Le <strong>sable abrasif est le seul levier</strong> permettant de révéler les couleurs des métaux (cuivre/laiton) pour la segmentation IA.</p>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Verrous méthodologiques identifiés</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>Quantification de la poussière</h5>
+              <p>Difficulté de bilan de masse précis due aux fuites inhérentes aux outils (transferts bétonnière/crible). Imprécision sur le calcul exact du % de perte fine — sans impact sur l'analyse industrielle finale.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Magnétisme (Fraction TU4)</h5>
+              <p>Identification d'un phénomène de rétention magnétique sur les parois des équipements. Biais dans le bilan de masse pour le stage — hypothèse d'un problème de process de flottaison à vérifier.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Valorisation de l'humidité</h5>
+              <p>Retour de l'expert canadien : l'eau n'est pas un problème — elle sature les couleurs des métaux (cuivre/laiton) et améliore la détection IA. Le séchage n'est donc pas nécessaire après rinçage.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Partenariat Eagle Vizion (Canada)</p>
+          <p>Eagle Vizion développe un banc d'essai prototype dédié intégrant l'ensemble des technologies de détection avancées : lumière polarisée (biréfringence), LED haute densité, caméra 4K, UV, spectro couleur complet et auto-calibrage IA.</p>
+          <ul class="modal-list">
+            <li><strong>Lumière polarisée</strong> : Attribue une couleur spécifique à chaque métal via sa biréfringence, permettant une identification immédiate</li>
+            <li><strong>Caméra 4K</strong> : Résolution inférieure au millimètre, détection fine des aspects de surface</li>
+            <li><strong>UV</strong> : Détection des oxydes résiduels invisibles en lumière blanche</li>
+            <li><strong>Auto-calibrage</strong> : Réajustement du spectre de couleurs en temps réel</li>
+            <li><strong>Forme</strong> : Couplage couleur + morphologie pour distinguer câbles, PCB et métaux massifs</li>
+          </ul>
+          <p style="margin-top:1rem;">Mon rôle : préparer les lots témoins (4 niveaux de propreté) et participer au <strong>labeling</strong> (étiquetage des images pour l'entraînement IA) à distance en visioconférence.</p>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Cahiers des charges rédigés</p>
+          <div class="defi-list">
+            <div class="defi-item">
+              <h5>CdC Commercial</h5>
+              <p>Précision massique ≤ 5 %, analyse de lots de 10 kg, rapport PDF automatique avec % par métal, interface simple pour les opérateurs. Identification : Cu, Laiton, Alu, Zinc, Inox, PCB, Câbles, Déchets.</p>
+            </div>
+            <div class="defi-item">
+              <h5>CdC Laboratoire</h5>
+              <p>Protocole standardisé (bétonnière 15 min, ratio sable 2:1, granulométrie adaptée), caisson antireflet IP65/66, lame d'air, caméra 4K Global Shutter, calcul de masse par densités théoriques, logigramme de décision inclus.</p>
+            </div>
+            <div class="defi-item">
+              <h5>Option Éjection</h5>
+              <p>Rampe pneumatique 6–7 bars, pitch (proximité buses) adapté à la granulométrie, latence &lt; 1 ms, activation multi-buses pour pièces massives, carter blindé, air sec ISO 8573-1.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-section">
+          <p class="modal-section-title">Compétences développées</p>
+          <div class="comp-tags">
+            <span class="comp-tag">Métrologie industrielle</span>
+            <span class="comp-tag">Rédaction de Cahiers des Charges</span>
+            <span class="comp-tag">Protocoles de préparation matière</span>
+            <span class="comp-tag">Machine Learning / Labeling</span>
+            <span class="comp-tag">Collaboration internationale</span>
+            <span class="comp-tag">Vision industrielle IA</span>
+            <span class="comp-tag">Gestion de projet (Gantt/WBS)</span>
+            <span class="comp-tag">Communication professionnelle</span>
+            <span class="comp-tag">Anglais rédactionnel</span>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+  </div>
+ 
   <script>
+    // Modal open/close
+    function openModal(id) {
+      const overlay = document.getElementById('modal-' + id);
+      if (!overlay) return;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+ 
+    function closeModal(id) {
+      const overlay = document.getElementById('modal-' + id);
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+ 
+    function closeModalOnOverlay(e, id) {
+      if (e.target === e.currentTarget) closeModal(id);
+    }
+ 
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => {
+          m.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+ 
+    // Scroll reveal
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('on'), i * 70);
-          obs.unobserve(e.target);
-        }
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('on'), i * 70); obs.unobserve(e.target); }
       });
     }, { threshold: 0.07, rootMargin: '0px 0px -50px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
+ 
+    // Skill bars
     const skillObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -782,10 +1336,10 @@
         }
       });
     }, { threshold: 0.25 });
-
     document.querySelectorAll('.skill-group').forEach(el => skillObs.observe(el));
-
-    const allSections = document.querySelectorAll('[id]');
+ 
+    // Nav active
+    const allSections = document.querySelectorAll('[id]:not([id^="modal"])');
     const navAs = document.querySelectorAll('.nav-links a:not(.nav-cv)');
     window.addEventListener('scroll', () => {
       let cur = '';
