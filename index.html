@@ -4,9 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jules Balluais — Portfolio</title>
+
+  <!-- ── SEO ── -->
+  <meta name="description" content="Portfolio de Jules Balluais — Étudiant en BUT Mesures Physiques à l'IUT de Blois, spécialisé en instrumentation, métrologie et automatisation." />
+  <meta name="author" content="Jules Balluais" />
+  <link rel="canonical" href="https://kiritah-blip.github.io/Portfolio/" />
+
+  <!-- ── Open Graph (LinkedIn, WhatsApp, Discord…) ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://kiritah-blip.github.io/Portfolio/" />
+  <meta property="og:title"       content="Jules Balluais — Portfolio" />
+  <meta property="og:description" content="Portfolio de Jules Balluais — Étudiant en BUT Mesures Physiques à l'IUT de Blois, spécialisé en instrumentation, métrologie et automatisation." />
+  <meta property="og:image"       content="https://kiritah-blip.github.io/Portfolio/images/og-preview.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"      content="fr_FR" />
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Jules Balluais — Portfolio" />
+  <meta name="twitter:description" content="Portfolio de Jules Balluais — Étudiant en BUT Mesures Physiques à l'IUT de Blois, spécialisé en instrumentation, métrologie et automatisation." />
+  <meta name="twitter:image"       content="https://kiritah-blip.github.io/Portfolio/images/og-preview.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/framer-motion@11.11.11/dist/framer-motion.js" onerror="window.__motionFailed=true"></script>
   <style>
     :root {
       --bg:       #181c22;
@@ -63,7 +85,11 @@
     .nav-logo { font-family: 'Cinzel', serif; font-size: 0.82rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--blue); }
     .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.25s; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.25s;
+      /* Zone de clic élargie — padding invisible qui facilite le survol et le clic */
+      padding: 0.6rem 0.35rem;
+      margin: -0.6rem -0.35rem;
+    }
     .nav-links a:hover { color: var(--text); }
     .nav-cv { color: var(--accent) !important; border: 1px solid var(--accent) !important; padding: 0.45rem 1rem; transition: all 0.25s !important; }
     .nav-cv:hover { background: var(--accent) !important; color: var(--bg) !important; }
@@ -563,6 +589,276 @@
     .reveal { opacity:0; transform:translateY(24px); transition:opacity .75s ease,transform .75s ease; }
     .reveal.on { opacity:1; transform:translateY(0); }
 
+    /* ── MOTION ENHANCEMENTS ── */
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    /* 3D perspective pour les cartes */
+    .projects-grid { perspective: 1000px; }
+    .card {
+      will-change: transform;
+      /* Retirer transform de la transition — Motion le gère */
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: none; /* Motion gère la transformation */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12),
+                  0 20px 60px rgba(0,0,0,0.42),
+                  0 0 0 1px rgba(91,155,213,0.22);
+    }
+
+    /* Glow curseur — halo qui suit la souris via --x / --y (injectés par le JS) */
+    .card::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      border-radius: inherit;
+      background: radial-gradient(
+        circle 280px at var(--x, 50%) var(--y, 50%),
+        rgba(232,185,74,0.18) 0%,
+        rgba(91,155,213,0.12) 40%,
+        transparent 65%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .card:hover::after { opacity: 1; }
+
+    /* S'assurer que le contenu reste au-dessus du glow et du preview */
+    .card > *:not(.card-preview) { position: relative; z-index: 1; }
+
+    /* ── Aperçu image au hover ── */
+    .card-preview {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+      /* Assombrir l'image pour que le texte reste lisible */
+      filter: brightness(0.22) saturate(1.4) blur(1px);
+    }
+    .card:hover .card-preview {
+      opacity: 1;
+      transform: scale(1.0);
+    }
+    /* Dégradé au bas de la carte pour le footer toujours lisible */
+    .card-preview::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(24,28,34,0.5) 55%,
+        rgba(24,28,34,0.95) 100%
+      );
+    }
+
+    /* Tool pills : hover interactif */
+    .tool-pill { cursor: default; transition: background 0.22s, border-color 0.22s, color 0.22s; }
+    .tool-pill:hover {
+      background: rgba(91,155,213,0.15);
+      border-color: rgba(91,155,213,0.45);
+      color: #8ec4eb;
+    }
+
+    /* Espacement sections légèrement augmenté */
+    .section-wrap { padding: 7rem 2rem; }
+
+    /* Skill bars plus lisibles */
+    .skill-track { height: 3px; border-radius: 2px; }
+    .skill-prog  { border-radius: 2px; }
+
+    /* Ligne de timeline avec dégradé subtil */
+    .tl-line { background: linear-gradient(to bottom, rgba(201,154,48,0.5) 0%, var(--border2) 100%); }
+
+    /* ── TIMELINE ANIMÉE ── */
+
+    /* États initiaux — tout masqué avant que l'observer déclenche */
+    .tl-item .tl-year {
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.42s ease, transform 0.42s cubic-bezier(0.16,1,0.3,1);
+    }
+    .tl-item .tl-body {
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.42s ease, transform 0.42s cubic-bezier(0.16,1,0.3,1);
+    }
+    /* Diamant : scale(0) → scale(1) avec spring */
+    .tl-item .tl-line::before {
+      transform: translateX(-50%) rotate(45deg) scale(0);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    /* Ligne verticale : scaleY(0→1) depuis le haut */
+    .tl-item .tl-line {
+      transform-origin: top center;
+      transform: scaleY(0);
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* États finaux — déclenchés par .tl-on sur chaque .tl-item */
+    .tl-item.tl-on .tl-year {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .tl-item.tl-on .tl-body {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: 0.06s; /* légèrement après la date */
+    }
+    .tl-item.tl-on .tl-line::before {
+      transform: translateX(-50%) rotate(45deg) scale(1);
+      transition-delay: 0.09s; /* diamant après le texte */
+    }
+    .tl-item.tl-on .tl-line {
+      transform: scaleY(1);
+      transition-delay: 0.18s; /* ligne descend après le diamant */
+    }
+
+    /* Contact links : lueur dorée au hover */
+    .c-link:hover { box-shadow: 0 0 24px rgba(232,185,74,0.12); }
+
+    /* ── COMPTEURS ANIMÉS COMPÉTENCES ── */
+    /* On passe en flex-start pour que le 3e item (compteur) se positionne proprement */
+    .skill-label { justify-content: flex-start; gap: 0.5rem; }
+    .skill-label > span { margin-left: auto; } /* "Avancé" reste à droite du nom */
+
+    .skill-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.67rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      min-width: 2.8ch;
+      text-align: right;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      /* Poussé complètement à droite */
+      margin-left: auto !important;
+    }
+    .skill-count.visible { opacity: 1; }
+
+    /* ── LOADER SPLASH SCREEN ── */
+    #loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #0c0f14;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.4rem;
+      transition: opacity 0.55s ease;
+    }
+    #loader.fade-out { opacity: 0; pointer-events: none; }
+
+    .ll-name {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: flex; align-items: baseline;
+    }
+    /* Chaque lettre — état initial invisible */
+    .ll {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(18px);
+      color: #dde3ee;
+      transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.16,1,0.3,1);
+    }
+    .ll.on  { opacity: 1; transform: translateY(0); }
+    .ll.acc { color: #e8b94a; } /* Lettre accent — J et B */
+    .ll.sp  { width: 0.35em; } /* Espace entre Jules et Balluais */
+
+    .ll-bar {
+      width: 0; height: 1px;
+      background: linear-gradient(to right, transparent, #e8b94a, transparent);
+      transition: width 0.5s ease;
+    }
+    .ll-bar.on { width: 90px; }
+
+    .ll-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: #6a7590;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .ll-tag.on { opacity: 1; }
+
+    /* ── SPOTLIGHT HERO ── */
+    #hero-spotlight {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2; /* au-dessus du fond, sous le texte via opacité */
+      background: radial-gradient(
+        circle 700px at var(--sx, 50%) var(--sy, 50%),
+        rgba(232,185,74,0.07)  0%,
+        rgba(91,155,213,0.04)  35%,
+        transparent            70%
+      );
+      opacity: 0;
+      /* Transition douce : apparition à l'entrée, disparition à la sortie */
+      transition: opacity 0.6s ease;
+      will-change: background;
+    }
+    #hero-spotlight.active { opacity: 1; }
+
+    /* ── CURSEUR CUSTOM LUMINEUX ── */
+    /* Uniquement sur écrans avec souris précise (pas tactile) */
+    @media (pointer: fine) {
+      html, html * { cursor: none !important; }
+
+      #cursor-dot {
+        position: fixed; top: 0; left: 0;
+        width: 8px; height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        pointer-events: none; z-index: 9999;
+        box-shadow: 0 0 10px 3px rgba(232,185,74,0.55);
+        transition: width 0.2s ease, height 0.2s ease,
+                    background 0.2s ease, box-shadow 0.2s ease, opacity 0.3s;
+        will-change: transform;
+      }
+
+      #cursor-ring {
+        position: fixed; top: 0; left: 0;
+        width: 38px; height: 38px;
+        border: 1.5px solid rgba(232,185,74,0.35);
+        border-radius: 50%;
+        pointer-events: none; z-index: 9998;
+        transition: width 0.28s ease, height 0.28s ease,
+                    border-color 0.28s ease, background 0.28s ease, opacity 0.3s;
+        will-change: transform;
+      }
+
+      /* Survol d'un lien / bouton → bleu */
+      .cursor-link #cursor-dot {
+        width: 6px; height: 6px;
+        background: var(--blue);
+        box-shadow: 0 0 14px 5px rgba(91,155,213,0.65);
+      }
+      .cursor-link #cursor-ring {
+        width: 52px; height: 52px;
+        border-color: rgba(91,155,213,0.55);
+        background: rgba(91,155,213,0.05);
+      }
+
+      /* Survol d'une carte → or large */
+      .cursor-card #cursor-dot {
+        width: 11px; height: 11px;
+        background: var(--accent);
+        box-shadow: 0 0 18px 6px rgba(232,185,74,0.7);
+      }
+      .cursor-card #cursor-ring {
+        width: 70px; height: 70px;
+        border-color: rgba(232,185,74,0.42);
+        background: rgba(232,185,74,0.04);
+      }
+
+      /* Curseur hors fenêtre → invisible */
+      .cursor-out #cursor-dot,
+      .cursor-out #cursor-ring { opacity: 0; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -571,9 +867,275 @@
       .modal-header, .modal-body { padding: 1.5rem; }
     }
     @media (max-width: 600px) { .nav-links { display: none; } }
+
+    /* ── HAMBURGER MENU MOBILE ── */
+
+    /* Bouton ☰ — caché sur desktop */
+    #nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    #nav-burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                  opacity   0.25s ease,
+                  width     0.25s ease;
+    }
+    /* Croix quand ouvert */
+    nav.menu-open #nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.menu-open #nav-burger span:nth-child(2) { opacity: 0; width: 0; }
+    nav.menu-open #nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Panneau latéral */
+    #nav-mobile {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(80vw, 300px);
+      height: 100dvh;
+      background: rgba(11,14,19,0.98);
+      backdrop-filter: blur(24px);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2.5rem 2rem;
+      gap: 0.2rem;
+      transform: translateX(100%);
+      transition: transform 0.42s cubic-bezier(0.16,1,0.3,1);
+    }
+    nav.menu-open #nav-mobile { transform: translateX(0); }
+
+    /* Liens dans le panneau */
+    #nav-mobile a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.85rem 0;
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    #nav-mobile a:last-child { border-bottom: none; }
+    #nav-mobile a:hover,
+    #nav-mobile a:focus  { color: var(--text); padding-left: 0.5rem; }
+    #nav-mobile .nav-cv  {
+      margin-top: 1.4rem;
+      border: 1px solid rgba(232,185,74,0.5) !important;
+      color: var(--accent) !important;
+      padding: 0.75rem 1.2rem !important;
+      border-bottom: 1px solid rgba(232,185,74,0.5) !important;
+      text-align: center;
+      border-radius: 0;
+    }
+    #nav-mobile .nav-cv:hover { background: rgba(232,185,74,0.08) !important; padding-left: 1.2rem !important; }
+
+    /* Overlay sombre derrière le panneau */
+    #nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    nav.menu-open ~ #nav-overlay,
+    body.menu-open #nav-overlay { opacity: 1; pointer-events: auto; }
+
+    /* Affichage conditionnel selon breakpoint */
+    @media (max-width: 600px) {
+      #nav-burger { display: flex; }
+    }
+    @media (min-width: 601px) {
+      #nav-mobile  { display: none; }
+      #nav-overlay { display: none; }
+    }
+
+    /* ── NAV AU SCROLL ── */
+    nav {
+      transition: background 0.4s ease, backdrop-filter 0.4s ease,
+                  border-color 0.4s ease, padding 0.4s ease;
+    }
+    nav.nav-scrolled {
+      background: rgba(11,14,19,0.97);
+      backdrop-filter: blur(28px);
+      border-bottom-color: rgba(255,255,255,0.11);
+      padding-top: 0.85rem;
+      padding-bottom: 0.85rem;
+    }
+
+    /* ── NAV INDICATOR ── */
+    #nav-indicator {
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      box-shadow: 0 0 8px rgba(232,185,74,0.45);
+      border-radius: 1px;
+      pointer-events: none;
+      opacity: 0;
+      transition: left   0.40s cubic-bezier(0.16,1,0.3,1),
+                  width  0.40s cubic-bezier(0.16,1,0.3,1),
+                  opacity 0.25s ease;
+    }
+
+    /* ── RIPPLE EFFECT BOUTONS ── */
+    .btn, .btn-more, .nav-cv, .c-link {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple-el {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.26);
+      width: 4px; height: 4px;
+      transform: translate(-50%,-50%) scale(0);
+      animation: rippleExpand 0.58s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleExpand {
+      to { transform: translate(-50%,-50%) scale(90); opacity: 0; }
+    }
+
+    /* ── BOUTON RETOUR EN HAUT ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 42px; height: 42px;
+      background: rgba(18,22,28,0.85);
+      border: 1px solid rgba(232,185,74,0.45);
+      color: var(--accent);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 350;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease,
+                  background 0.25s, border-color 0.25s, box-shadow 0.25s;
+      backdrop-filter: blur(10px);
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    #back-to-top:hover {
+      background: rgba(232,185,74,0.12);
+      border-color: var(--accent);
+      box-shadow: 0 0 22px rgba(232,185,74,0.18);
+    }
+
+    /* ── PREFERS-REDUCED-MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        animation-delay: 0ms !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+      }
+      /* Hero — éléments déjà en opacity:0 via fadeUp, on les force visibles */
+      .hero-eyebrow, .hero-title, .hero-rule, .hero-sub, .hero-btns, .scroll-cue {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      /* Cartes projets */
+      .card { opacity: 1 !important; transform: none !important; }
+      /* Barres de compétences */
+      .skill-prog { transform: scaleX(1) !important; }
+      /* Éléments reveal génériques */
+      .reveal { opacity: 1 !important; transform: none !important; }
+      /* Timeline */
+      .tl-item .tl-year, .tl-item .tl-body { opacity: 1 !important; transform: none !important; }
+      .tl-item .tl-line  { transform: scaleY(1) !important; }
+      .tl-item .tl-line::before { transform: translateX(-50%) rotate(45deg) scale(1) !important; }
+      /* Modals */
+      .modal { transform: translateY(0) !important; }
+      /* Lettres du loader */
+      .ll { opacity: 1 !important; transform: none !important; }
+    }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(to right, var(--accent2), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      z-index: 300;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(232,185,74,0.5);
+    }
+
+    /* ── TYPING CURSOR ── */
+    .type-cursor {
+      display: inline;
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 300;
+      margin-left: 1px;
+      animation: typeBlink 0.75s step-end infinite;
+    }
+    .type-cursor-done {
+      animation: typeFade 0.8s ease forwards;
+    }
+    @keyframes typeBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes typeFade  { to{opacity:0} }
+
+    /* ── PARALLAX IMAGES MODALS ── */
+    @media (prefers-reduced-motion: no-preference) {
+      /* scale de base quand le modal est ouvert : crée la marge nécessaire au déplacement */
+      .modal-overlay.open .modal-img img {
+        transform: scale(1.08);
+        transform-origin: center center;
+      }
+    }
+
+    /* ── PARTICULES HERO ── */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <button id="back-to-top" aria-label="Retour en haut">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
+  <!-- ── Splash screen — retiré du DOM après animation ── -->
+  <div id="loader" aria-hidden="true"></div>
 
   <nav>
     <a href="#accueil" class="nav-logo">Jules <span>Balluais</span></a>
@@ -586,7 +1148,29 @@
       <li><a href="#contact">Contact</a></li>
       <li><a href="#" class="nav-cv" onclick="event.preventDefault(); openCVModal();">Télécharger CV</a></li>
     </ul>
+    <span id="nav-indicator" aria-hidden="true"></span>
+
+    <!-- Bouton hamburger — visible uniquement mobile -->
+    <button id="nav-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-mobile">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- Panneau menu mobile -->
+  <div id="nav-mobile" role="dialog" aria-label="Menu de navigation" aria-hidden="true">
+    <a href="#accueil">Accueil</a>
+    <a href="#apropos">Infos</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#projets">Projets</a>
+    <a href="#competences">Compétences</a>
+    <a href="#contact">Contact</a>
+    <a href="#" class="nav-cv" onclick="event.preventDefault(); openCVModal();">Télécharger CV</a>
+  </div>
+
+  <!-- Overlay sombre — clic pour fermer -->
+  <div id="nav-overlay" aria-hidden="true"></div>
 
   <!-- HERO -->
   <div id="accueil" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 5rem;">
@@ -635,7 +1219,7 @@
       <p class="s-eyebrow reveal">02 — Parcours</p>
       <h2 class="s-title reveal">Mon parcours</h2>
       <div class="s-rule reveal"></div>
-      <div class="timeline reveal">
+      <div class="timeline" id="timeline">
         <div class="tl-item">
           <div class="tl-year">2020<br>2023</div>
           <div class="tl-line"></div>
@@ -682,7 +1266,7 @@
       <div class="projects-grid">
 
         <!-- PROJET 1 -->
-        <div class="card reveal">
+        <div class="card reveal" data-preview="images/Signal_Oscillation.png">
           <p class="card-num">Projet 01 · 1ère Année</p>
           <span class="card-tag">Instrumentation</span>
           <h3 class="card-title">Oscillation d'un Pendule</h3>
@@ -702,7 +1286,7 @@
         </div>
 
         <!-- PROJET 2 -->
-        <div class="card reveal">
+        <div class="card reveal" data-preview="images/Signal_elec_ultrasons.png">
           <p class="card-num">Projet 02 · 1ère Année</p>
           <span class="card-tag">Acoustique</span>
           <h3 class="card-title">Propagation des Ultrasons dans le vide</h3>
@@ -720,7 +1304,7 @@
         </div>
 
         <!-- PROJET 3 -->
-        <div class="card reveal">
+        <div class="card reveal" data-preview="images/Boite_Optique_Spectro.png">
           <p class="card-num">Projet 03 · 2ème Année</p>
           <span class="card-tag">Chimie & Électronique</span>
           <h3 class="card-title">Concevoir un Spectromètre</h3>
@@ -740,7 +1324,7 @@
         </div>
 
         <!-- STAGE -->
-        <div class="card reveal">
+        <div class="card reveal" data-preview="images/Mesure_spectro.png">
           <p class="card-num">Projet 04 · Stage · 2026</p>
           <span class="card-tag">Comet Traitements — Belgique</span>
           <h3 class="card-title">Machine IA de Reconnaissance des Métaux</h3>
@@ -760,7 +1344,7 @@
         </div>
 
         <!-- ATELIER RADIO -->
-        <div class="card reveal">
+        <div class="card reveal" data-preview="images/Affiche_radio2.png">
           <p class="card-num">Projet 05 · Atelier</p>
           <span class="card-tag">Radio Campus Tours</span>
           <h3 class="card-title">Projet Atelier Radio</h3>
@@ -1159,7 +1743,7 @@
           <p>Pour mesurer la propagation des ultrasons dans une machine à vide, un support métallique intégrant les deux capteurs (émetteur MA40S4S et récepteur MA40S4R) a été assemblé. Les capteurs ont été soudés à l'aide d'étain et protégés par des gaines pour assurer solidité et étanchéité. Le support a été fixé à l'intérieur d'un cylindre métallique inséré dans la cuve à vide.</p>
           <p>Les fils des capteurs ont été connectés à une plaque de prototypage reliée à l'extérieur de la cuve, puis aux instruments de mesure. En diminuant progressivement la pression, nous avons observé sur l'oscilloscope l'évolution du signal ultrasonore en fonction du niveau de vide.</p>
           <figure class="modal-img">
-            <img src="images/Schéma_ultrasons_électroniques.png" alt="Schéma électronique Kicad" loading="lazy">
+            <img src="images/Schema_ultrasons_electroniques.png" alt="Schéma électronique Kicad" loading="lazy">
             <figcaption>Schéma électronique du circuit (Kicad) — amplification du signal récepteur</figcaption>
           </figure>
         </div>
@@ -1337,11 +1921,11 @@
           </ul>
           <div class="modal-img-side">
             <figure class="modal-img">
-              <img src="images/Boîte_Optique_Spectro.png" alt="Intérieur du boîtier optique" loading="lazy">
+              <img src="images/Boite_Optique_Spectro.png" alt="Intérieur du boîtier optique" loading="lazy">
               <figcaption>Intérieur du boîtier — Arduino + capteur TSL2591</figcaption>
             </figure>
             <figure class="modal-img">
-              <img src="images/Boîte2_Spectro.png" alt="Boîtier extérieur fermé" loading="lazy">
+              <img src="images/Boite2_Spectro.png" alt="Boîtier extérieur fermé" loading="lazy">
               <figcaption>Boîtier fermé — enceinte opaque (isolation 97%)</figcaption>
             </figure>
           </div>
@@ -1396,7 +1980,7 @@
             </div>
           </div>
           <figure class="modal-img">
-            <img src="images/Courbe_étalonnage_spectro.png" alt="Courbe d'étalonnage de l'absorbance" loading="lazy">
+            <img src="images/Courbe_etalonnage_spectro2.png" alt="Courbe d'étalonnage de l'absorbance" loading="lazy">
             <figcaption>Courbe d'étalonnage de l'absorbance — R² ≈ 0,998 (linéarité Beer-Lambert validée)</figcaption>
           </figure>
           <div class="modal-img-row">
@@ -1470,7 +2054,7 @@
       <div class="modal-body">
 
         <figure class="modal-img">
-          <img src="images/Affiche_radio.png" alt="Affiche du projet radio" loading="lazy">
+          <img src="images/Affiche_radio2.png" alt="Affiche du projet radio" loading="lazy">
           <figcaption>Équipe radio — J. Balluais · A. Moubine · A. Amzighe (Radio Campus Tours 99.5)</figcaption>
         </figure>
 
@@ -1887,14 +2471,775 @@
     }, { threshold: 0.25 });
     document.querySelectorAll('.skill-group').forEach(el => skillObs.observe(el));
 
-    // Nav active
+    // Nav active — indicateur glissant
     const allSections = document.querySelectorAll('[id]:not([id^="modal"])');
-    const navAs = document.querySelectorAll('.nav-links a:not(.nav-cv)');
+    const navAs  = document.querySelectorAll('.nav-links a:not(.nav-cv)');
+    const navInd = document.getElementById('nav-indicator');
+    const navEl  = document.querySelector('nav');
+
+    function moveNavIndicator(a) {
+      if (!navInd || !navEl) return;
+      if (!a) { navInd.style.opacity = '0'; return; }
+      const nr = navEl.getBoundingClientRect();
+      const ar = a.getBoundingClientRect();
+      navInd.style.left    = (ar.left - nr.left) + 'px';
+      navInd.style.width   = ar.width + 'px';
+      navInd.style.opacity = '1';
+    }
+
     window.addEventListener('scroll', () => {
-      let cur = '';
+      let cur = '', activeA = null;
       allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
-      navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
-    });
+      navAs.forEach(a => {
+        const on = a.getAttribute('href') === '#' + cur;
+        a.style.color = on ? 'var(--text)' : '';
+        if (on) activeA = a;
+      });
+      moveNavIndicator(activeA);
+    }, { passive: true });
+
+    // État initial
+    requestAnimationFrame(() => moveNavIndicator(navAs[0]));
+  </script>
+
+  <!-- ── Framer Motion — Animations cartes de projets ── -->
+  <script>
+    (function () {
+      // ── Injection des aperçus image sur chaque carte ──
+      document.querySelectorAll('.card[data-preview]').forEach(function(card) {
+        var preview = document.createElement('div');
+        preview.className = 'card-preview';
+        preview.style.backgroundImage = "url('" + card.dataset.preview + "')";
+        card.insertBefore(preview, card.firstChild);
+      });
+
+      // ── Fallback : CDN absent ou en erreur ──
+      function showCardsFallback() {
+        document.querySelectorAll('.card').forEach(function (c) {
+          c.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          c.style.opacity    = '1';
+          c.style.transform  = '';
+        });
+      }
+
+      if (typeof Motion === 'undefined' || window.__motionFailed) {
+        showCardsFallback();
+        return;
+      }
+
+      // Filet de sécurité : si l'animation ne se termine pas dans les 3s, forcer la visibilité
+      var motionSafetyTimer = setTimeout(function () {
+        document.querySelectorAll('.card').forEach(function (c) {
+          if (parseFloat(window.getComputedStyle(c).opacity) < 0.9) showCardsFallback();
+        });
+      }, 3000);
+
+      const { animate } = Motion;
+
+      // ── Animation d'entrée des cartes ──
+      animate('.card', { opacity: [0, 1], y: [100, 0], scale: [0.9, 1] }, {
+        delay: function(i) { return i * 0.1; },
+        duration: 0.8,
+        ease: 'easeOut'
+      }).then(function () { clearTimeout(motionSafetyTimer); });
+
+      // ── Effet Tilt 3D et Glow au survol ──
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !('ontouchstart' in window))
+      document.querySelectorAll('.card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+
+          // Position curseur pour le glow (custom properties CSS)
+          card.style.setProperty('--x', x + 'px');
+          card.style.setProperty('--y', y + 'px');
+
+          // Rotation accentuée pour l'effet 3D bien visible
+          var rotateX = (y / rect.height - 0.5) * 20;
+          var rotateY = (x / rect.width - 0.5) * -20;
+          card.style.transform =
+            'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+          card.style.transform =
+            'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    })();
+  </script>
+
+  <!-- ── Timeline animée — Parcours ── -->
+  <script>
+    (function () {
+      var timeline = document.getElementById('timeline');
+      if (!timeline) return;
+
+      var items = Array.from(timeline.querySelectorAll('.tl-item'));
+      var ITEM_STAGGER = 330; // ms entre chaque item
+
+      var tlObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          // Stagger : chaque item apparaît ITEM_STAGGER ms après le précédent
+          items.forEach(function (item, i) {
+            setTimeout(function () {
+              item.classList.add('tl-on');
+            }, i * ITEM_STAGGER);
+          });
+
+          tlObs.unobserve(entry.target); // une seule fois
+        });
+      }, { threshold: 0.15, rootMargin: '-40px 0px -40px 0px' });
+
+      tlObs.observe(timeline);
+    })();
+  </script>
+
+  <!-- ── Loader Splash Screen ── -->
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      if (!loader) return;
+
+      // Reduced-motion : suppression immédiate, pas d'animation
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+        return;
+      }
+
+      // ── Construction du contenu ──
+      var nameEl = document.createElement('div');  nameEl.className = 'll-name';
+
+      var barEl  = document.createElement('div');  barEl.className  = 'll-bar';
+      var tagEl  = document.createElement('div');  tagEl.className  = 'll-tag';
+      tagEl.textContent = 'Portfolio · BUT Mesures Physiques';
+
+      // Découpe "Jules Balluais" lettre par lettre
+      'Jules Balluais'.split('').forEach(function (ch, i) {
+        var s = document.createElement('span');
+        // Classe de base
+        s.className = 'll';
+        // Espace entre Jules et Balluais
+        if (ch === ' ') { s.classList.add('sp'); s.textContent = ' '; }
+        else             { s.textContent = ch; }
+        // Première lettre de chaque mot en or
+        if (i === 0 || i === 6) s.classList.add('acc');
+        nameEl.appendChild(s);
+      });
+
+      loader.appendChild(nameEl);
+      loader.appendChild(barEl);
+      loader.appendChild(tagEl);
+
+      // ── Animation staggerée ──
+      var letters  = nameEl.querySelectorAll('.ll');
+      var START    = 100;   // délai avant la 1re lettre (ms)
+      var STEP     = 48;    // intervalle entre chaque lettre
+
+      letters.forEach(function (l, i) {
+        setTimeout(function () { l.classList.add('on'); }, START + i * STEP);
+      });
+
+      // Quand la dernière lettre est apparue
+      var nameEnd = START + (letters.length - 1) * STEP;  // ≈ 724 ms
+
+      // Ligne décorative et sous-titre
+      setTimeout(function () { barEl.classList.add('on'); }, nameEnd + 80);
+      setTimeout(function () { tagEl.classList.add('on'); }, nameEnd + 200);
+
+      // Fondu de sortie — total ≈ 1.8 s
+      setTimeout(function () {
+        loader.classList.add('fade-out');
+      }, nameEnd + 1000);
+
+      // Suppression du DOM après la transition (ne ralentit plus le rendu)
+      setTimeout(function () {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, nameEnd + 1650);
+    })();
+  </script>
+
+  <!-- ── Compteurs animés — Compétences ── -->
+  <script>
+    (function () {
+      // ── 1. Injection des spans compteur dans chaque skill-label ──
+      document.querySelectorAll('.skill-row').forEach(function (row) {
+        var prog  = row.querySelector('.skill-prog');
+        var label = row.querySelector('.skill-label');
+        if (!prog || !label) return;
+
+        var target = Math.round(parseFloat(prog.dataset.w) * 100);
+
+        var count = document.createElement('span');
+        count.className = 'skill-count';
+        count.textContent = '0%';
+        count.dataset.target = String(target);
+        label.appendChild(count);
+      });
+
+      // ── 2. Fonction count-up avec ease-out cubique (1 - (1-t)³) ──
+      function countUp(el, target, duration, delay) {
+        setTimeout(function () {
+          el.classList.add('visible');
+          var startTime = null;
+
+          function frame(now) {
+            if (!startTime) startTime = now;
+            var t = Math.min((now - startTime) / duration, 1);
+            // ease-out cubic : démarre vite, ralentit à l'arrivée
+            var eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(eased * target) + '%';
+            if (t < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              el.textContent = target + '%'; // valeur finale exacte
+            }
+          }
+          requestAnimationFrame(frame);
+        }, delay);
+      }
+
+      // ── 3. Observer : déclenche quand le groupe entre dans le viewport ──
+      // Même seuil que l'observer des barres (0.25) pour être synchronisé
+      var counterObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          var counts = entry.target.querySelectorAll('.skill-count');
+          counts.forEach(function (count, i) {
+            countUp(
+              count,
+              parseInt(count.dataset.target, 10),
+              1150,      // durée en ms — calée sur la barre (1.1s)
+              i * 90     // décalage staggeré entre chaque ligne
+            );
+          });
+
+          counterObs.unobserve(entry.target); // ne se déclenche qu'une fois
+        });
+      }, { threshold: 0.25 });
+
+      document.querySelectorAll('.skill-group').forEach(function (el) {
+        counterObs.observe(el);
+      });
+    })();
+  </script>
+
+  <!-- ── Spotlight Hero ── -->
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if ('ontouchstart' in window) return;
+      var hero = document.getElementById('accueil');
+      if (!hero) return;
+
+      // ── Injection du div spotlight ──
+      var spot = document.createElement('div');
+      spot.id = 'hero-spotlight';
+      hero.appendChild(spot);
+
+      // Éléments qui reçoivent un micro-parallax au mouvement de souris
+      var parallaxEls = [
+        { el: hero.querySelector('.hero-title'),   depth: 0.012 },
+        { el: hero.querySelector('.hero-eyebrow'), depth: 0.018 },
+        { el: hero.querySelector('.hero-sub'),     depth: 0.008 },
+        { el: hero.querySelector('.hero-rule'),    depth: 0.015 }
+      ].filter(function (o) { return o.el; });
+
+      var heroRect;
+      var rafId = null;
+      var targetX = 50, targetY = 50; // position en % dans le hero
+      var currentX = 50, currentY = 50;
+
+      // Recalcule le bounding rect une seule fois (optimisation)
+      function updateRect() { heroRect = hero.getBoundingClientRect(); }
+      updateRect();
+      window.addEventListener('resize', updateRect, { passive: true });
+
+      hero.addEventListener('mousemove', function (e) {
+        if (!heroRect) return;
+        // Position en % relative au hero
+        targetX = ((e.clientX - heroRect.left) / heroRect.width)  * 100;
+        targetY = ((e.clientY - heroRect.top)  / heroRect.height) * 100;
+        spot.classList.add('active');
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      });
+
+      hero.addEventListener('mouseleave', function () {
+        spot.classList.remove('active');
+        // Réinitialise le parallax en douceur
+        parallaxEls.forEach(function (o) {
+          o.el.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+          o.el.style.transform  = 'translate(0px, 0px)';
+        });
+        cancelAnimationFrame(rafId);
+        rafId = null;
+        targetX = 50; targetY = 50;
+        currentX = 50; currentY = 50;
+      });
+
+      // ── Boucle RAF : lerp position spotlight + parallax texte ──
+      function tick() {
+        // Lerp fluide (10 % de l'écart par frame)
+        currentX += (targetX - currentX) * 0.10;
+        currentY += (targetY - currentY) * 0.10;
+
+        // Mise à jour spotlight
+        spot.style.setProperty('--sx', currentX.toFixed(2) + '%');
+        spot.style.setProperty('--sy', currentY.toFixed(2) + '%');
+
+        // Micro-parallax sur chaque élément texte
+        var cx = currentX - 50; // offset par rapport au centre (-50 → +50)
+        var cy = currentY - 50;
+        parallaxEls.forEach(function (o) {
+          var dx = cx * o.depth * 60; // max ~±18px sur le titre
+          var dy = cy * o.depth * 40;
+          o.el.style.transition = 'none';
+          o.el.style.transform  = 'translate(' + dx.toFixed(2) + 'px, ' + dy.toFixed(2) + 'px)';
+        });
+
+        rafId = requestAnimationFrame(tick);
+      }
+    })();
+  </script>
+
+  <!-- ── Boutons magnétiques ── -->
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if ('ontouchstart' in window) return;
+      // Ratio de déplacement réduit pour rester fluide sans "fuir" sous la souris
+      var STRENGTH_MAIN = 0.22;  // .btn-primary, .btn-ghost — réduit de 0.38
+      var STRENGTH_CV   = 0.15;  // .nav-cv — encore plus doux, c'est de la nav
+      var STRENGTH_MORE = 0.12;  // .btn-more — subtil dans les cartes
+
+      function makeMagnetic(el, strength) {
+        el.addEventListener('mousemove', function (e) {
+          var rect = el.getBoundingClientRect();
+          var dx = (e.clientX - (rect.left + rect.width  / 2)) * strength;
+          var dy = (e.clientY - (rect.top  + rect.height / 2)) * strength;
+          el.style.transition = 'transform 0.15s ease-out';
+          el.style.transform  = 'translate(' + dx + 'px, ' + dy + 'px)';
+        });
+
+        el.addEventListener('mouseleave', function () {
+          el.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          el.style.transform  = 'translate(0px, 0px)';
+        });
+
+        // ── Snap au clic : le bouton revient à sa position avant que le click s'enregistre ──
+        // Sans ça, le click peut rater car le bouton est encore décalé au moment du mousedown
+        el.addEventListener('mousedown', function () {
+          el.style.transition = 'transform 0.08s ease-out';
+          el.style.transform  = 'translate(0px, 0px)';
+        });
+      }
+
+      // Boutons hero CTA
+      document.querySelectorAll('.btn-primary, .btn-ghost').forEach(function (el) {
+        makeMagnetic(el, STRENGTH_MAIN);
+      });
+
+      // Nav CV — force réduite, c'est un lien de navigation
+      document.querySelectorAll('.nav-cv').forEach(function (el) {
+        makeMagnetic(el, STRENGTH_CV);
+      });
+
+      // Boutons "En savoir plus" sur les cartes
+      document.querySelectorAll('.btn-more').forEach(function (el) {
+        makeMagnetic(el, STRENGTH_MORE);
+      });
+    })();
+  </script>
+
+  <!-- ── Scroll progress bar ── -->
+  <script>
+    (function () {
+      var bar = document.getElementById('scroll-progress');
+      if (!bar) return;
+      function update() {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      }
+      window.addEventListener('scroll', update, { passive: true });
+    })();
+  </script>
+
+  <!-- ── Typing effect Hero ── -->
+  <script>
+    (function () {
+      var el = document.querySelector('.hero-sub');
+      if (!el) return;
+
+      // Reduced-motion : affichage immédiat du texte complet, pas de typing
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.innerHTML = 'Futur diplômé en <strong>BUT Mesures Physiques</strong> à l\'IUT de Blois. Spécialisé en instrumentation, métrologie et automatisation.';
+        return;
+      }
+
+      var segments = [
+        { text: 'Futur diplômé en ',           bold: false },
+        { text: 'BUT Mesures Physiques',        bold: true  },
+        { text: ' à l\'IUT de Blois. Spécialisé en instrumentation, métrologie et automatisation.', bold: false }
+      ];
+
+      // Tableau plat : chaque caractère sait s'il est gras
+      var chars = [];
+      segments.forEach(function (seg) {
+        seg.text.split('').forEach(function (ch) {
+          chars.push({ ch: ch, bold: seg.bold });
+        });
+      });
+
+      // Réserver la hauteur pour éviter le saut de layout
+      el.style.minHeight = el.offsetHeight + 'px';
+      el.innerHTML = '';
+
+      // Curseur clignotant
+      var cursor = document.createElement('span');
+      cursor.className = 'type-cursor';
+      cursor.textContent = '|';
+      el.appendChild(cursor);
+
+      var typed = 0;
+
+      function rebuild() {
+        var html = '';
+        var inBold = false;
+        for (var i = 0; i < typed; i++) {
+          var c = chars[i];
+          if (c.bold  && !inBold) { html += '<strong>'; inBold = true;  }
+          if (!c.bold &&  inBold) { html += '</strong>'; inBold = false; }
+          html += c.ch;
+        }
+        if (inBold) html += '</strong>';
+        el.innerHTML = html;
+        el.appendChild(cursor);
+      }
+
+      // Démarre après la fin des animations hero + disparition du loader (~2.1s)
+      setTimeout(function () {
+        function type() {
+          if (typed >= chars.length) {
+            setTimeout(function () { cursor.classList.add('type-cursor-done'); }, 900);
+            return;
+          }
+          typed++;
+          rebuild();
+          var ch = chars[typed - 1].ch;
+          var delay = 24;
+          if (ch === '.') delay = 160;
+          else if (ch === ',') delay = 100;
+          setTimeout(type, delay);
+        }
+        type();
+      }, 2600);
+    })();
+  </script>
+
+  <!-- ── Particules Hero — canvas étoiles ── -->
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var hero = document.getElementById('accueil');
+      if (!hero) return;
+
+      var canvas = document.createElement('canvas');
+      canvas.id = 'hero-canvas';
+      hero.insertBefore(canvas, hero.firstChild);
+      var ctx = canvas.getContext('2d');
+
+      var W, H;
+      function resize() {
+        W = canvas.width  = hero.offsetWidth;
+        H = canvas.height = hero.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', function () {
+        resize();
+        particles.forEach(function (p) {
+          if (p.x > W) p.x = Math.random() * W;
+          if (p.y > H) p.y = Math.random() * H;
+        });
+      }, { passive: true });
+
+      var N = ('ontouchstart' in window) ? 30 : 88;
+      var particles = [];
+
+      function pickColor() {
+        var r = Math.random();
+        if (r < 0.55) return 'rgba(255,255,255,';
+        if (r < 0.75) return 'rgba(221,227,238,';
+        if (r < 0.88) return 'rgba(91,155,213,';
+        return 'rgba(232,185,74,';
+      }
+
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      function makeParticle() {
+        return {
+          x:          rand(0, W),
+          y:          rand(0, H),
+          r:          rand(0.3, 1.6),
+          vx:         rand(-0.10, 0.10),
+          vy:         rand(-0.18, -0.04),
+          baseAlpha:  rand(0.08, 0.50),
+          phase:      rand(0, Math.PI * 2),
+          phaseSpeed: rand(0.004, 0.014),
+          color:      pickColor(),
+        };
+      }
+
+      for (var i = 0; i < N; i++) particles.push(makeParticle());
+
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+
+        particles.forEach(function (p) {
+          p.phase += p.phaseSpeed;
+          var alpha = p.baseAlpha * (0.35 + 0.65 * (0.5 + 0.5 * Math.sin(p.phase)));
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+          ctx.fillStyle = p.color + alpha.toFixed(3) + ')';
+          ctx.fill();
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Wrap : réapparaît en bas avec X aléatoire
+          if (p.y < -4)    { p.y = H + 4; p.x = rand(0, W); }
+          if (p.x < -4)    { p.x = W + 4; }
+          if (p.x > W + 4) { p.x = -4; }
+        });
+
+        rafId = requestAnimationFrame(tick);
+      }
+
+      var rafId = requestAnimationFrame(tick);
+
+      // Pause le canvas quand le hero est hors-champ → libère le GPU au scroll
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          if (!rafId) rafId = requestAnimationFrame(tick);
+        } else {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }, { threshold: 0 }).observe(hero);
+    })();
+  </script>
+
+  <!-- ── Nav au scroll ── -->
+  <script>
+    (function () {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('nav-scrolled', window.scrollY > 80);
+      }, { passive: true });
+    })();
+  </script>
+
+  <!-- ── Menu hamburger mobile ── -->
+  <script>
+    (function () {
+      var nav     = document.querySelector('nav');
+      var burger  = document.getElementById('nav-burger');
+      var panel   = document.getElementById('nav-mobile');
+      var overlay = document.getElementById('nav-overlay');
+      if (!nav || !burger || !panel || !overlay) return;
+
+      function open() {
+        nav.classList.add('menu-open');
+        burger.setAttribute('aria-expanded', 'true');
+        panel.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // bloque le scroll fond
+      }
+
+      function close() {
+        nav.classList.remove('menu-open');
+        burger.setAttribute('aria-expanded', 'false');
+        panel.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function toggle() {
+        nav.classList.contains('menu-open') ? close() : open();
+      }
+
+      // Bouton ☰ / ✕
+      burger.addEventListener('click', toggle);
+
+      // Clic sur l'overlay → ferme
+      overlay.addEventListener('click', close);
+
+      // Clic sur un lien du panneau → ferme + scroll vers section
+      panel.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', close);
+      });
+
+      // Touche Échap → ferme
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('menu-open')) close();
+      });
+
+      // Resize vers desktop → ferme proprement
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 600) close();
+      }, { passive: true });
+    })();
+  </script>
+
+  <!-- ── Bouton retour en haut ── -->
+  <script>
+    (function () {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
+
+  <!-- ── Ripple effect boutons ── -->
+  <script>
+    (function () {
+      document.querySelectorAll('.btn, .btn-more, .nav-cv, .c-link').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          var rect = el.getBoundingClientRect();
+          var rip  = document.createElement('span');
+          rip.className  = 'ripple-el';
+          rip.style.left = (e.clientX - rect.left) + 'px';
+          rip.style.top  = (e.clientY - rect.top)  + 'px';
+          el.appendChild(rip);
+          setTimeout(function () {
+            if (rip.parentNode) rip.parentNode.removeChild(rip);
+          }, 650);
+        });
+      });
+    })();
+  </script>
+
+  <!-- ── Parallax images modals ── -->
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var FACTOR = 0.06;
+
+      function updateParallax(overlay) {
+        var r       = overlay.getBoundingClientRect();
+        var centerY = r.top + r.height * 0.5;
+
+        overlay.querySelectorAll('.modal-img img').forEach(function (img) {
+          var h = img.offsetHeight;
+          if (!h) return;
+
+          // Marge disponible de chaque côté grâce au scale(1.08) : ~3.7 % de la hauteur
+          var cap = Math.min(h * 0.037, 14);
+
+          var ir  = img.getBoundingClientRect();
+          var raw = ((ir.top + ir.height * 0.5) - centerY) * FACTOR;
+          var offset = Math.max(-cap, Math.min(cap, raw));
+
+          img.style.transform = 'scale(1.08) translateY(' + offset.toFixed(2) + 'px)';
+        });
+      }
+
+      document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+        // Parallax au scroll
+        overlay.addEventListener('scroll', function () {
+          updateParallax(overlay);
+        }, { passive: true });
+
+        // MutationObserver : détecte ouverture (.open) et fermeture
+        new MutationObserver(function () {
+          if (overlay.classList.contains('open')) {
+            // Après la transition d'entrée (350 ms)
+            setTimeout(function () { updateParallax(overlay); }, 370);
+          } else {
+            // Reset propre : scrollTop + transforms
+            overlay.scrollTop = 0;
+            overlay.querySelectorAll('.modal-img img').forEach(function (img) {
+              img.style.transform = '';
+            });
+          }
+        }).observe(overlay, { attributes: true, attributeFilter: ['class'] });
+      });
+    })();
+  </script>
+
+  <!-- ── Curseur custom lumineux ── -->
+  <script>
+    (function () {
+      // Uniquement sur les appareils avec souris précise (pas tactile)
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+
+      // Créer le dot (point précis) et le ring (cercle qui lag)
+      var dot  = document.createElement('div'); dot.id  = 'cursor-dot';
+      var ring = document.createElement('div'); ring.id = 'cursor-ring';
+      document.body.appendChild(dot);
+      document.body.appendChild(ring);
+
+      // Position initiale au centre pour éviter un saut au chargement
+      var mx = window.innerWidth / 2,  my = window.innerHeight / 2;
+      var rx = mx, ry = my;
+
+      // ── Dot : suit la souris instantanément via transform (pas de reflow) ──
+      document.addEventListener('mousemove', function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        // On centre le dot (8px) sur la position exacte du curseur
+        dot.style.transform = 'translate(' + (mx - 4) + 'px, ' + (my - 4) + 'px)';
+        document.body.classList.remove('cursor-out');
+      });
+
+      // Disparaît quand la souris sort de la fenêtre
+      document.addEventListener('mouseleave', function () {
+        document.body.classList.add('cursor-out');
+      });
+      document.addEventListener('mouseenter', function () {
+        document.body.classList.remove('cursor-out');
+      });
+
+      // ── Ring : interpolation linéaire (lerp) pour l'effet de lag ──
+      // 0.1 = 10 % de l'écart rattrapé à chaque frame → lag doux et fluide
+      function tick() {
+        rx += (mx - rx) * 0.13;  // légèrement plus réactif → suit mieux sans lag frustrant
+        ry += (my - ry) * 0.13;
+        // On centre le ring (38px) → offset de -19px
+        ring.style.transform = 'translate(' + (rx - 19) + 'px, ' + (ry - 19) + 'px)';
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // ── État CARTE : ring large doré ──
+      document.querySelectorAll('.card').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-card'); });
+        el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-card'); });
+      });
+
+      // ── État LIEN / BOUTON : ring bleu compact ──
+      document.querySelectorAll('a, button, .btn-more, .c-link').forEach(function (el) {
+        el.addEventListener('mouseenter', function () {
+          // Ne pas écraser l'état carte si on survole un bouton dans une carte
+          if (!document.body.classList.contains('cursor-card')) {
+            document.body.classList.add('cursor-link');
+          }
+        });
+        el.addEventListener('mouseleave', function () {
+          document.body.classList.remove('cursor-link');
+        });
+      });
+    })();
   </script>
 </body>
 </html>
