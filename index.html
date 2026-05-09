@@ -1419,23 +1419,97 @@
       pointer-events: none;
     }
 
-    /* Version mobile — en bas du panneau */
+    /* Version mobile — accordéon "Langue" en bas du panneau */
     .lang-mobile {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.25rem;
       margin-top: 1.4rem;
       padding-top: 1.2rem;
       border-top: 1px solid rgba(255,255,255,0.06);
       width: 100%;
     }
-    .lang-mobile .lang-btn {
-      font-size: 0.62rem;
-      padding: 0.4rem 0.2rem;
-      letter-spacing: 0.14em;
+
+    /* Bouton déclencheur "Langue · FR ›" */
+    .lang-mobile-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 0.85rem 0;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s, padding-left 0.2s;
     }
-    .lang-mobile .lang-sep { font-size: 0.6rem; }
+    .lang-mobile-toggle:hover,
+    .lang-mobile-toggle:focus  { color: var(--text); padding-left: 0.5rem; outline: none; }
+    .lang-mobile-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* Badge langue active (ex. "FR") */
+    .lang-current-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      border: 1px solid rgba(232,185,74,0.4);
+      padding: 0.1rem 0.38rem;
+      border-radius: 2px;
+      line-height: 1.6;
+    }
+
+    /* Chevron rotatif */
+    .lang-chevron {
+      margin-left: auto;
+      stroke: var(--muted);
+      transition: transform 0.28s ease;
+      flex-shrink: 0;
+    }
+    .lang-mobile-toggle[aria-expanded="true"] .lang-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Panneau expansible */
+    .lang-mobile-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      overflow: hidden;
+      transition: grid-template-rows 0.32s cubic-bezier(0.16,1,0.3,1);
+    }
+    .lang-mobile-panel.panel-open {
+      grid-template-rows: 1fr;
+    }
+    .lang-mobile-panel-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-bottom: 0.4rem;
+    }
+
+    /* Boutons de langue dans le panneau */
+    .lang-mobile-panel .lang-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 0.6rem 0 0.6rem 1rem;
+      border-left: 2px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, padding-left 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .lang-mobile-panel .lang-btn:hover        { color: var(--text);   border-left-color: rgba(255,255,255,0.2); padding-left: 1.4rem; }
+    .lang-mobile-panel .lang-btn.lang-active  { color: var(--accent); border-left-color: var(--accent); }
+    .lang-mobile-panel .lang-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
     /* ── HAMBURGER MENU MOBILE ── */
 
@@ -1544,8 +1618,6 @@
 
     /* ── TOUCH TARGETS — 44px minimum (recommandation Apple/Google) ── */
     @media (max-width: 600px) {
-      /* Boutons lang dans le panneau mobile */
-      .lang-mobile .lang-btn { min-height: 44px; display: flex; align-items: center; padding-left: 0.5rem; padding-right: 0.5rem; }
       /* Boutons "En savoir plus" dans les cards */
       .btn-more { min-height: 44px; }
       /* Bouton "Envoyer un autre message" */
@@ -2085,18 +2157,29 @@
     <a href="#competences" data-i18n="nav.skills">Compétences</a>
     <a href="#contact"     data-i18n="nav.contact">Contact</a>
     <a href="#" class="nav-cv" onclick="event.preventDefault(); openCVModal();" data-i18n="nav.cv">Télécharger CV</a>
-    <div class="lang-mobile" role="group" aria-label="Langue du site">
-      <button class="lang-btn lang-active" data-lang="fr" aria-pressed="true">FR</button>
-      <span class="lang-sep" aria-hidden="true">/</span>
-      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-      <span class="lang-sep" aria-hidden="true">/</span>
-      <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
-      <span class="lang-sep" aria-hidden="true">/</span>
-      <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
-      <span class="lang-sep" aria-hidden="true">/</span>
-      <button class="lang-btn" data-lang="zh" aria-pressed="false">ZH</button>
-      <span class="lang-sep" aria-hidden="true">/</span>
-      <button class="lang-btn" data-lang="ja" aria-pressed="false">JA</button>
+    <div class="lang-mobile">
+      <!-- Déclencheur accordéon -->
+      <button class="lang-mobile-toggle" id="langToggleMobile"
+              aria-expanded="false" aria-controls="langMobilePanel">
+        <span data-i18n="nav.lang">Langue</span>
+        <span class="lang-current-badge" id="langCurrentBadge">FR</span>
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             width="13" height="13" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <!-- Panneau expansible -->
+      <div class="lang-mobile-panel" id="langMobilePanel" role="group" aria-label="Langue du site">
+        <div class="lang-mobile-panel-inner">
+          <button class="lang-btn lang-active" data-lang="fr" aria-pressed="true">Français</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">English</button>
+          <button class="lang-btn" data-lang="de" aria-pressed="false">Deutsch</button>
+          <button class="lang-btn" data-lang="es" aria-pressed="false">Español</button>
+          <button class="lang-btn" data-lang="zh" aria-pressed="false">中文</button>
+          <button class="lang-btn" data-lang="ja" aria-pressed="false">日本語</button>
+        </div>
+      </div>
     </div>
     <div class="theme-mobile">
       <button class="theme-btn" id="themeToggleMobile" aria-label="Activer le thème clair">
@@ -4488,6 +4571,40 @@
     })();
   </script>
 
+  <!-- ── Accordéon langue mobile ── -->
+  <script>
+    (function () {
+      var toggle = document.getElementById('langToggleMobile');
+      var panel  = document.getElementById('langMobilePanel');
+      if (!toggle || !panel) return;
+
+      function openPanel() {
+        panel.classList.add('panel-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function closePanel() {
+        panel.classList.remove('panel-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', function () {
+        panel.classList.contains('panel-open') ? closePanel() : openPanel();
+      });
+
+      /* Ferme le panneau quand une langue est choisie */
+      panel.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          closePanel();
+        });
+      });
+
+      /* Ferme si on ferme le menu hamburger */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closePanel();
+      });
+    })();
+  </script>
+
   <!-- ── Bouton retour en haut ── -->
   <script>
     (function () {
@@ -4562,6 +4679,7 @@
           'nav.skills':     'Compétences',
           'nav.contact':    'Contact',
           'nav.cv':         'Télécharger CV',
+          'nav.lang':       'Langue',
           /* Hero */
           'hero.sub':         'Futur diplômé en <strong>BUT Mesures Physiques</strong> à l\'IUT de Blois. Spécialisé en instrumentation, métrologie et automatisation.',
           'hero.btn-projects':'Voir mes projets',
@@ -4729,6 +4847,7 @@
           'nav.skills':     'Skills',
           'nav.contact':    'Contact',
           'nav.cv':         'Download CV',
+          'nav.lang':       'Language',
           /* Hero */
           'hero.sub':         'Aspiring graduate in <strong>Physical Measurements</strong> at IUT de Blois. Specialised in instrumentation, metrology and automation.',
           'hero.btn-projects':'View my projects',
@@ -4956,6 +5075,7 @@
           'nav.skills':     'Kenntnisse',
           'nav.contact':    'Kontakt',
           'nav.cv':         'Lebenslauf',
+          'nav.lang':       'Sprache',
           /* Hero */
           'hero.sub':         'Zukünftiger Absolvent in <strong>Technischem Bachelor Physikalische Messungen</strong> am IUT de Blois. Spezialisiert auf Instrumentierung, Metrologie und Automatisierung.',
           'hero.btn-projects':'Meine Projekte',
@@ -5157,6 +5277,7 @@
           'nav.skills':     'Competencias',
           'nav.contact':    'Contacto',
           'nav.cv':         'Descargar CV',
+          'nav.lang':       'Idioma',
           /* Hero */
           'hero.sub':         'Estudiante de <strong>Medidas Físicas</strong> en el IUT de Blois. Especializado en instrumentación, metrología y automatización.',
           'hero.btn-projects':'Ver mis proyectos',
@@ -5383,6 +5504,7 @@
           'nav.skills':     '技能',
           'nav.contact':    '联系',
           'nav.cv':         '下载简历',
+          'nav.lang':       '语言',
           /* 首屏 */
           'hero.sub':         '布卢瓦工业大学（IUT de Blois）<strong>物理测量</strong>专业学生，专注于仪器仪表、计量学与自动化。',
           'hero.btn-projects':'查看我的项目',
@@ -5609,6 +5731,7 @@
           'nav.skills':     'スキル',
           'nav.contact':    '連絡先',
           'nav.cv':         '履歴書をダウンロード',
+          'nav.lang':       '言語',
           /* ヒーロー */
           'hero.sub':         'ブロワ工科大学（IUT de Blois）<strong>物理測定</strong>専攻の学生。計装、計測学、自動化に特化。',
           'hero.btn-projects':'プロジェクトを見る',
@@ -5854,6 +5977,10 @@
           btn.classList.toggle('lang-active', active);
           btn.setAttribute('aria-pressed', String(active));
         });
+
+        // Badge langue active dans le menu mobile
+        var badge = document.getElementById('langCurrentBadge');
+        if (badge) badge.textContent = lang.toUpperCase();
       };
 
       // ── Listeners clics ───────────────────────────────────────
