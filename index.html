@@ -364,7 +364,7 @@
       65%  { background-position: 100% center; } /* reflet hors cadre à gauche */
       100% { background-position: 100% center; } /* pause avant la prochaine passe */
     }
-    .hero-name-line { display: block; font-size: clamp(1.4rem, 4vw, 2.8rem); letter-spacing: 0.25em; color: var(--text2); font-weight: 400; text-shadow: none; margin-top: 0.3rem; }
+    .hero-name-line { display: block; font-size: clamp(1.4rem, 4vw, 2.8rem); letter-spacing: 0.25em; padding-left: 0.25em; color: var(--text2); font-weight: 400; text-shadow: none; margin-top: 0.3rem; }
     .hero-name-line em { font-style: normal; color: var(--blue); font-weight: 600; }
     .hero-rule { width: 50px; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); margin: 2rem auto; opacity: 0; animation: fadeUp 0.9s ease forwards 0.8s; }
     .hero-sub { font-size: 1rem; color: var(--text2); max-width: 520px; opacity: 0; animation: fadeUp 0.9s ease forwards 1s; }
@@ -1074,14 +1074,19 @@
     #apropos .reveal,
     #competences .reveal  { transform: translateX(-38px); transition: opacity .7s ease, transform .7s cubic-bezier(0.16,1,0.3,1); }
     #parcours .reveal     { transform: translateX(38px);  transition: opacity .7s ease, transform .7s cubic-bezier(0.16,1,0.3,1); }
-    #projets .reveal      { transform: translateY(28px) scale(0.97); transition: opacity .8s ease, transform .8s cubic-bezier(0.34,1.3,0.64,1); }
+    #projets .reveal,
+    #projets .card,
+    #projets .caption {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      visibility: visible !important;
+    }
     #contact .reveal      { transform: none; transition: opacity .9s ease; }
 
     /* ── MOTION ENHANCEMENTS ── */
-    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cline x1='12' y1='2' x2='12' y2='10' stroke='%23e8b94a' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='12' y1='14' x2='12' y2='22' stroke='%23e8b94a' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='2' y1='12' x2='10' y2='12' stroke='%23e8b94a' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='14' y1='12' x2='22' y2='12' stroke='%23e8b94a' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23e8b94a'/%3E%3C/svg%3E") 12 12, crosshair; }
 
-    /* 3D perspective pour les cartes (tilt JS) */
-    .projects-grid { perspective: 1000px; }
     .card {
       /* transform géré en inline par le tilt JS — exclu de la transition CSS pour éviter le lag */
       transition: border-color 0.3s, box-shadow 0.3s;
@@ -1115,13 +1120,6 @@
       to { --card-border-angle: 360deg; }
     }
 
-    /* ── ANIMATION D'ENTRÉE DES CARTES (vanilla — remplace Framer Motion) ── */
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(36px) scale(0.96); }
-      to   { opacity: 1; transform: none; }
-    }
-    .card.animate-ready { opacity: 0; }
-    .card.animate-in    { animation: cardIn 0.65s ease forwards; }
 
     /* Glow curseur — halo lerpé via --x/--y/--glow-r (injectés par le JS)
        Le rayon est proportionnel à la taille de la card (--glow-r défini en JS) */
@@ -1335,128 +1333,6 @@
     }
     #hero-spotlight.active { opacity: 1; }
 
-    /* ── CURSEUR CUSTOM LUMINEUX ── */
-    /* Uniquement sur écrans avec souris précise (pas tactile) */
-    @media (pointer: fine) {
-      html, html * { cursor: none !important; }
-
-      #cursor-dot {
-        position: fixed; top: 0; left: 0;
-        width: 8px; height: 8px;
-        background: var(--accent);
-        border-radius: 50%;
-        pointer-events: none; z-index: 9999;
-        box-shadow: 0 0 10px 3px rgba(232,185,74,0.55);
-        transition: width 0.18s ease, height 0.18s ease, border-radius 0.18s ease,
-                    background 0.18s ease, box-shadow 0.18s ease, opacity 0.3s;
-        will-change: transform;
-        /* Contexte pour les formes ::before / ::after */
-        overflow: visible;
-      }
-      /* Pseudo-éléments partagés — masqués par défaut, activés selon l'état */
-      #cursor-dot::before, #cursor-dot::after {
-        content: ''; position: absolute;
-        opacity: 0; transition: opacity 0.14s ease;
-        pointer-events: none;
-      }
-
-      #cursor-ring {
-        position: fixed; top: 0; left: 0;
-        width: 38px; height: 38px;
-        border: 1.5px solid rgba(232,185,74,0.35);
-        border-radius: 50%;
-        pointer-events: none; z-index: 9998;
-        transition: width 0.28s ease, height 0.28s ease,
-                    border-color 0.28s ease, background 0.28s ease, opacity 0.3s;
-        will-change: transform;
-      }
-
-      /* Survol d'un lien / bouton → bleu */
-      .cursor-link #cursor-dot {
-        width: 6px; height: 6px;
-        background: var(--blue);
-        box-shadow: 0 0 14px 5px rgba(91,155,213,0.65);
-      }
-      .cursor-link #cursor-ring {
-        width: 52px; height: 52px;
-        border-color: rgba(91,155,213,0.55);
-        background: rgba(91,155,213,0.05);
-      }
-
-      /* Survol d'une carte → or large + flèche ↗ flottante */
-      .cursor-card #cursor-dot {
-        width: 10px; height: 10px;
-        background: var(--accent);
-        box-shadow: 0 0 18px 6px rgba(232,185,74,0.7);
-      }
-      .cursor-card #cursor-dot::before {
-        content: '↗';
-        opacity: 1;
-        width: auto; height: auto; background: none;
-        font-family: 'DM Mono', monospace; font-size: 9px; line-height: 1;
-        color: var(--accent);
-        top: -13px; left: 9px;
-        white-space: nowrap;
-      }
-      .cursor-card #cursor-ring {
-        width: 68px; height: 68px;
-        border-color: rgba(232,185,74,0.40);
-        background: rgba(232,185,74,0.04);
-      }
-
-      /* Hero → + crosshair doré */
-      .cursor-hero #cursor-dot {
-        width: 2px; height: 18px; border-radius: 1px;
-        background: rgba(232,185,74,0.85); box-shadow: none;
-      }
-      .cursor-hero #cursor-dot::before {
-        opacity: 1;
-        width: 18px; height: 2px; border-radius: 1px;
-        top: 50%; left: 50%; transform: translate(-50%, -50%);
-        background: rgba(232,185,74,0.85);
-      }
-      .cursor-hero #cursor-ring {
-        width: 30px; height: 30px;
-        border-color: rgba(232,185,74,0.20);
-      }
-
-      /* Input / textarea → I-beam */
-      .cursor-text #cursor-dot {
-        width: 1.5px; height: 18px; border-radius: 1px;
-        background: var(--text2); box-shadow: none;
-      }
-      .cursor-text #cursor-dot::before {
-        opacity: 1;
-        width: 9px; height: 1.5px; border-radius: 1px;
-        top: 0; left: 50%; transform: translateX(-50%);
-        background: var(--text2);
-      }
-      .cursor-text #cursor-dot::after {
-        content: '';
-        position: absolute; opacity: 1;
-        width: 9px; height: 1.5px; border-radius: 1px;
-        bottom: 0; left: 50%; transform: translateX(-50%);
-        background: var(--text2);
-      }
-      .cursor-text #cursor-ring { opacity: 0 !important; }
-
-      /* Curseur hors fenêtre → invisible */
-      .cursor-out #cursor-dot,
-      .cursor-out #cursor-ring { opacity: 0; }
-
-      /* ── CURSOR TRAIL ── */
-      .cursor-trail {
-        position: fixed; pointer-events: none; z-index: 9997;
-        width: 4px; height: 4px; border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 6px 2px rgba(232,185,74,0.45);
-        animation: trail-fade 0.5s ease-out forwards;
-      }
-      @keyframes trail-fade {
-        from { opacity: 0.7; transform: scale(1); }
-        to   { opacity: 0;   transform: scale(0); }
-      }
-    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
@@ -1572,7 +1448,7 @@
       transform: translateX(100%);
       transition: transform 0.42s cubic-bezier(0.16,1,0.3,1);
     }
-    nav.menu-open #nav-mobile { transform: translateX(0); }
+    nav.menu-open ~ #nav-mobile { transform: translateX(0); }
 
     /* Liens dans le panneau */
     #nav-mobile a {
@@ -1723,37 +1599,6 @@
       box-shadow: 0 0 22px rgba(232,185,74,0.18);
     }
 
-    /* ── Section progress indicator ── */
-    #section-nav {
-      position: fixed; right: 1.2rem; top: 50%;
-      transform: translateY(-50%);
-      z-index: 300;
-      display: flex; flex-direction: column; align-items: center; gap: 0.58rem;
-    }
-    .snav-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--muted); opacity: 0.32;
-      cursor: pointer; position: relative;
-      text-decoration: none; border: none;
-      transition: opacity .25s ease, background .25s ease, transform .25s cubic-bezier(0.34,1.5,0.64,1);
-    }
-    /* Tooltip à gauche du dot */
-    .snav-dot::after {
-      content: attr(data-label);
-      position: absolute; right: calc(100% + 10px); top: 50%;
-      transform: translateY(-50%);
-      font-family: 'DM Mono', monospace; font-size: 0.63rem;
-      letter-spacing: 0.09em; text-transform: uppercase; white-space: nowrap;
-      color: var(--text); background: var(--surface); border: 1px solid var(--border);
-      padding: 0.17rem 0.46rem; border-radius: 3px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .16s ease;
-    }
-    .snav-dot:hover        { opacity: 1; background: var(--accent); transform: scale(1.55); }
-    .snav-dot:hover::after { opacity: 1; }
-    .snav-dot.active       { opacity: 1; background: var(--accent); transform: scale(1.42); }
-    /* Masqué sur mobile et écrans tactiles */
-    @media (max-width: 900px), (pointer: coarse) { #section-nav { display: none; } }
 
     /* ── Section snap ── */
     html.snap-on { scroll-snap-type: y mandatory; }
@@ -1854,7 +1699,6 @@
       body::after   { display: none; }             /* speckle radial     */
       #accueil::before,
       #accueil::after { opacity: 0; }              /* morphing hero bg   */
-      .cursor-trail   { display: none; }           /* trail particules   */
 
       /* ── 3. Gradient text → couleur solide (background-clip illisible HC) ── */
       .s-title {
@@ -1887,10 +1731,6 @@
         stroke-width: 2.5;
       }
 
-      /* ── 6. Sticky label et dots de nav — opacity maximale ── */
-      #section-label { opacity: 1 !important; color: var(--text2); }
-      .snav-dot      { opacity: 0.65 !important; }
-      .snav-dot.active { opacity: 1 !important; }
 
       /* ── 7. Nav underline plus épais ── */
       .nav-links a:not(.nav-cv)::after { height: 2px; }
@@ -2034,7 +1874,7 @@
       nav, #nav-mobile, #nav-overlay, #nav-burger,
       #loader, #back-to-top, #scroll-progress, #section-label, #section-nav,
       .skip-link, #hero-spotlight, #hero-canvas,
-      canvas, #focus-ring-svg, .cursor-dot, .cursor-ring, .cursor-trail,
+      canvas, #focus-ring-svg,
       .filter-bar, .card-footer, .btn-more,
       .hero-btns, .hero-rule, .scroll-cue,
       .s-eyebrow, .s-rule,
@@ -2142,17 +1982,6 @@
     </svg>
   </button>
 
-  <!-- ── Section progress indicator ── -->
-  <nav id="section-nav" aria-label="Navigation par section">
-    <a href="#accueil"     class="snav-dot" data-label="Accueil"     aria-label="Aller à : Accueil"></a>
-    <a href="#apropos"     class="snav-dot" data-label="À propos"    aria-label="Aller à : À propos"></a>
-    <a href="#parcours"    class="snav-dot" data-label="Parcours"    aria-label="Aller à : Parcours"></a>
-    <a href="#projets"     class="snav-dot" data-label="Projets"     aria-label="Aller à : Projets"></a>
-    <a href="#competences" class="snav-dot" data-label="Compétences" aria-label="Aller à : Compétences"></a>
-    <a href="#contact"     class="snav-dot" data-label="Contact"     aria-label="Aller à : Contact"></a>
-    <!-- Snap toggle — carré = comportement, pas destination -->
-    <button id="snap-toggle" aria-label="Activer le snap de section" data-label="Snap OFF"></button>
-  </nav>
 
   <!-- ── Splash screen — retiré du DOM après animation ── -->
   <div id="loader" aria-hidden="true"></div>
@@ -3725,21 +3554,13 @@
         if (e.isIntersecting) { setTimeout(() => e.target.classList.add('on'), i * 70); obs.unobserve(e.target); }
       });
     }, { threshold: 0.07, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.reveal:not(.card)').forEach(el => obs.observe(el));
+    // Éléments dans #projets : classe 'on' immédiate, pas d'observer
+    document.querySelectorAll('#projets .reveal, #projets .card').forEach(el => el.classList.add('on'));
+    // Autres sections : observer scroll normal
+    document.querySelectorAll('.reveal:not(.card)').forEach(el => {
+      if (!el.closest('#projets')) obs.observe(el);
+    });
 
-    // Stagger cards projets : cascade card 1 → card 2 → … avec délai fixe par index
-    (function () {
-      var grid = document.querySelector('.projets-grid');
-      if (!grid) return;
-      var fired = false;
-      new IntersectionObserver(function (entries) {
-        if (!entries[0].isIntersecting || fired) return;
-        fired = true; // une seule fois — obs.disconnect() serait suffisant mais fired est plus sûr
-        grid.querySelectorAll('.card').forEach(function (card, i) {
-          setTimeout(function () { card.classList.add('on'); }, i * 90);
-        });
-      }, { threshold: 0.04, rootMargin: '0px 0px -40px 0px' }).observe(grid);
-    })();
 
     // Skill bars — géré par le script unifié ci-dessous (RAF + tip + compteur)
 
@@ -3786,21 +3607,6 @@
       });
 
       // ── Animation d'entrée décalée — déclenche quand la grille entre dans le viewport ──
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        var cards = document.querySelectorAll('.card');
-        var grid  = document.querySelector('.projects-grid');
-        if (grid && cards.length) {
-          cards.forEach(function (c) { c.classList.add('animate-ready'); });
-          new IntersectionObserver(function (entries, obs) {
-            if (!entries[0].isIntersecting) return;
-            obs.disconnect();
-            cards.forEach(function (c, i) {
-              setTimeout(function () { c.classList.add('animate-in'); }, i * 100);
-            });
-          }, { threshold: 0.05 }).observe(grid);
-        }
-      }
-
       // ── Tilt 3D + Glow lerpé — le halo coule vers le curseur, glisse au centre au leave ──
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !('ontouchstart' in window)) {
         document.querySelectorAll('.card').forEach(function (card) {
@@ -3823,15 +3629,10 @@
             var rect = card.getBoundingClientRect();
             tx = e.clientX - rect.left;
             ty = e.clientY - rect.top;
-            /* Tilt immédiat — la rotation suit le curseur sans délai pour un toucher direct */
-            var rotateX = (ty / rect.height - 0.5) * 18;
-            var rotateY = (tx / rect.width  - 0.5) * -18;
-            card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
             if (!raf) raf = requestAnimationFrame(tick);
           });
 
           card.addEventListener('mouseleave', function () {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
             /* Le halo continue de lerper vers le centre pendant qu'il s'estompe (opacity CSS) */
             tx = card.offsetWidth  * 0.5;
             ty = card.offsetHeight * 0.5;
@@ -3939,15 +3740,15 @@
       setTimeout(function () { barEl.classList.add('on'); }, nameEnd + 80);
       setTimeout(function () { tagEl.classList.add('on'); }, nameEnd + 200);
 
-      // Fondu de sortie — total ≈ 1.8 s
+      // Fondu de sortie — pause prolongée pour laisser le temps de lire
       setTimeout(function () {
         loader.classList.add('fade-out');
-      }, nameEnd + 1000);
+      }, nameEnd + 2500);
 
       // Suppression du DOM après la transition (ne ralentit plus le rendu)
       setTimeout(function () {
         if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, nameEnd + 1650);
+      }, nameEnd + 3150);
     })();
   </script>
 
@@ -4119,9 +3920,8 @@
         parallaxEls.forEach(function (o) {
           var mouseDx = isTouch ? 0 : (cx * o.mouseDepth * 60);
           var mouseDy = isTouch ? 0 : (cy * o.mouseDepth * 40);
-          var scrollDy = -(currentSY * o.scrollDepth);
           o.el.style.transition = 'none';
-          o.el.style.transform  = 'translate(' + mouseDx.toFixed(2) + 'px, ' + (mouseDy + scrollDy).toFixed(2) + 'px)';
+          o.el.style.transform  = 'translate(' + mouseDx.toFixed(2) + 'px, ' + mouseDy.toFixed(2) + 'px)';
         });
 
         /* Arrêt du RAF quand les deux lerps ont convergé */
@@ -4220,66 +4020,6 @@
     })();
   </script>
 
-  <!-- ── Section progress indicator ── -->
-  <script>
-    (function () {
-      var dots = document.querySelectorAll('.snav-dot');
-      if (!dots.length) return;
-
-      /* Labels i18n — mis à jour quand la langue change */
-      var labels = {
-        fr: { accueil:'Accueil', apropos:'À propos', parcours:'Parcours',
-               projets:'Projets', competences:'Compétences', contact:'Contact' },
-        en: { accueil:'Home',    apropos:'About',    parcours:'Journey',
-               projets:'Projects', competences:'Skills', contact:'Contact' }
-      };
-      function updateLabels() {
-        var lang = window.__i18nLang || 'fr';
-        var map  = labels[lang] || labels.fr;
-        dots.forEach(function (dot) {
-          var id = (dot.getAttribute('href') || '').replace('#', '');
-          if (map[id]) {
-            dot.setAttribute('data-label',  map[id]);
-            dot.setAttribute('aria-label', 'Aller à : ' + map[id]);
-          }
-        });
-      }
-      updateLabels();
-
-      /* Hook setLang pour synchroniser les labels */
-      var _sl = window.setLang;
-      if (_sl) window.setLang = function (l) { _sl(l); updateLabels(); };
-
-      /* Clic → smooth scroll */
-      dots.forEach(function (dot) {
-        dot.addEventListener('click', function (e) {
-          e.preventDefault();
-          var target = document.querySelector(this.getAttribute('href'));
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
-      });
-
-      /* IntersectionObserver : bande centrale 20 % du viewport
-         → le dot de la section qui passe par le centre devient actif  */
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var id = entry.target.id;
-          dots.forEach(function (dot) {
-            dot.classList.toggle('active', dot.getAttribute('href') === '#' + id);
-          });
-        });
-      }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-
-      ['accueil','apropos','parcours','projets','competences','contact'].forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el) io.observe(el);
-      });
-
-      /* Dot initial actif dès le chargement */
-      dots[0] && dots[0].classList.add('active');
-    })();
-  </script>
 
   <!-- ── Sticky section label ── -->
   <script>
@@ -4434,7 +4174,7 @@
           rebuild();
           /* Rythme humain : espace/nbsp plus longs, lettres normales + variation aléatoire */
           var ch = chars[typed - 1].ch;
-          var delay = (ch === ' ' || ch === ' ') ? 95 : 44 + Math.floor(Math.random() * 28);
+          var delay = (ch === ' ' || ch === ' ') ? 45 : 20 + Math.floor(Math.random() * 10);
           setTimeout(type, delay);
         }
         type();
@@ -5098,117 +4838,7 @@
     })();
   </script>
 
-  <!-- ── Curseur custom lumineux ── -->
-  <script>
-    (function () {
-      // Uniquement sur les appareils avec souris précise (pas tactile)
-      if (!window.matchMedia('(pointer: fine)').matches) return;
 
-      // Créer le dot (point précis) et le ring (cercle qui lag)
-      var dot  = document.createElement('div'); dot.id  = 'cursor-dot';
-      var ring = document.createElement('div'); ring.id = 'cursor-ring';
-      document.body.appendChild(dot);
-      document.body.appendChild(ring);
-
-      // Position initiale au centre pour éviter un saut au chargement
-      var mx = window.innerWidth / 2,  my = window.innerHeight / 2;
-      var rx = mx, ry = my;
-
-      // ── Dot : suit la souris instantanément via transform (pas de reflow) ──
-      document.addEventListener('mousemove', function (e) {
-        mx = e.clientX;
-        my = e.clientY;
-        // On centre le dot (8px) sur la position exacte du curseur
-        dot.style.transform = 'translate(' + (mx - 4) + 'px, ' + (my - 4) + 'px)';
-        document.body.classList.remove('cursor-out');
-      });
-
-      // Disparaît quand la souris sort de la fenêtre
-      document.addEventListener('mouseleave', function () {
-        document.body.classList.add('cursor-out');
-      });
-      document.addEventListener('mouseenter', function () {
-        document.body.classList.remove('cursor-out');
-      });
-
-      // ── Ring : interpolation linéaire (lerp) pour l'effet de lag ──
-      // 0.1 = 10 % de l'écart rattrapé à chaque frame → lag doux et fluide
-      function tick() {
-        rx += (mx - rx) * 0.13;  // légèrement plus réactif → suit mieux sans lag frustrant
-        ry += (my - ry) * 0.13;
-        // On centre le ring (38px) → offset de -19px
-        ring.style.transform = 'translate(' + (rx - 19) + 'px, ' + (ry - 19) + 'px)';
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-
-      // ── Système de priorité : text > card > link > hero ──
-      var PRIORITY = ['text', 'card', 'link', 'hero'];
-      var states   = new Set();
-
-      function updateCursor() {
-        PRIORITY.forEach(function (s) { document.body.classList.remove('cursor-' + s); });
-        for (var i = 0; i < PRIORITY.length; i++) {
-          if (states.has(PRIORITY[i])) {
-            document.body.classList.add('cursor-' + PRIORITY[i]);
-            return;
-          }
-        }
-      }
-      function enter(s) { states.add(s);    updateCursor(); }
-      function leave(s) { states.delete(s); updateCursor(); }
-
-      // Hero → crosshair +
-      var heroEl = document.getElementById('accueil');
-      if (heroEl) {
-        heroEl.addEventListener('mouseenter', function () { enter('hero'); });
-        heroEl.addEventListener('mouseleave', function () { leave('hero'); });
-      }
-
-      // Cartes → ↗
-      document.querySelectorAll('.card').forEach(function (el) {
-        el.addEventListener('mouseenter', function () { enter('card'); });
-        el.addEventListener('mouseleave', function () { leave('card'); });
-      });
-
-      // Liens / boutons → ring bleu
-      document.querySelectorAll('a, button, .btn-more, .c-link').forEach(function (el) {
-        el.addEventListener('mouseenter', function () { enter('link'); });
-        el.addEventListener('mouseleave', function () { leave('link'); });
-      });
-
-      // Inputs / textareas → I-beam
-      document.querySelectorAll('input, textarea').forEach(function (el) {
-        el.addEventListener('mouseenter', function () { enter('text'); });
-        el.addEventListener('mouseleave', function () { leave('text'); });
-      });
-    })();
-  </script>
-
-  <!-- ── Cursor trail ── -->
-  <script>
-    (function () {
-      if (!window.matchMedia('(pointer: fine)').matches) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      var lastT = 0;
-      document.addEventListener('mousemove', function (e) {
-        var now = Date.now();
-        if (now - lastT < 38) return;   // ~26 particules/s max
-        lastT = now;
-
-        var p = document.createElement('span');
-        p.className = 'cursor-trail';
-        // Légère dispersion aléatoire autour du point curseur
-        var ox = (Math.random() - 0.5) * 5;
-        var oy = (Math.random() - 0.5) * 5;
-        p.style.left = (e.clientX - 2 + ox) + 'px';
-        p.style.top  = (e.clientY - 2 + oy) + 'px';
-        document.body.appendChild(p);
-        p.addEventListener('animationend', function () { p.remove(); });
-      }, { passive: true });
-    })();
-  </script>
 
   <!-- ── Focus ring SVG animé ── -->
   <script>
