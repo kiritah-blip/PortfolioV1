@@ -1380,7 +1380,12 @@
       nav { padding: 1.2rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
-      .modal-header, .modal-body { padding: 1.5rem; }
+      .modal-header { padding: 1.5rem; padding-top: 5rem; }
+      .modal-body   { padding: 1.5rem; }
+      /* Boutons flottants — repositionnés pour ne pas masquer le titre */
+      .modal-close  { top: 1rem; right: 1rem;  width: 38px; height: 38px; font-size: 0.95rem; }
+      .modal-share  { top: 1rem; right: 3.6rem; width: 38px; height: 38px; }
+      .modal-share svg { width: 13px; height: 13px; }
     }
     @media (max-width: 600px) { .nav-links { display: none; } }
 
@@ -5934,6 +5939,18 @@
       // ── Langue courante ────────────────────────────────────────
       window.__i18nLang = localStorage.getItem('portfolio-lang') || 'fr';
 
+      // ── Snapshot HTML initial (FR natif) ─────────────────────
+      // Capturé avant tout appel à setLang, sert de fallback pour les
+      // clés absentes du bloc T.fr (ex. m1.*, m2.*, … contenu modal).
+      var _origHtml = {};
+      var _origText = {};
+      document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+        _origHtml[el.dataset.i18nHtml] = el.innerHTML;
+      });
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        _origText[el.dataset.i18n] = el.textContent;
+      });
+
       // ── Moteur d'application ───────────────────────────────────
       window.setLang = function (lang) {
         if (!T[lang]) return;
@@ -5945,14 +5962,24 @@
 
         // Éléments texte simple
         document.querySelectorAll('[data-i18n]').forEach(function (el) {
-          var v = T[lang][el.dataset.i18n];
-          if (v !== undefined) el.textContent = v;
+          var key = el.dataset.i18n;
+          var v = T[lang][key];
+          if (v !== undefined) {
+            el.textContent = v;
+          } else if (_origText[key] !== undefined) {
+            el.textContent = _origText[key]; // fallback FR
+          }
         });
 
         // Éléments HTML (data-i18n-html)
         document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-          var v = T[lang][el.dataset.i18nHtml];
-          if (v !== undefined) el.innerHTML = v;
+          var key = el.dataset.i18nHtml;
+          var v = T[lang][key];
+          if (v !== undefined) {
+            el.innerHTML = v;
+          } else if (_origHtml[key] !== undefined) {
+            el.innerHTML = _origHtml[key]; // fallback FR
+          }
         });
 
         // Placeholders (data-i18n-placeholder)
