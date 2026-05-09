@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -1074,6 +1074,12 @@
     #apropos .reveal,
     #competences .reveal  { transform: translateX(-38px); transition: opacity .7s ease, transform .7s cubic-bezier(0.16,1,0.3,1); }
     #parcours .reveal     { transform: translateX(38px);  transition: opacity .7s ease, transform .7s cubic-bezier(0.16,1,0.3,1); }
+    /* Mobile : pas de translateX → évite le clipping par overflow-x: hidden */
+    @media (max-width: 860px) {
+      #apropos .reveal,
+      #competences .reveal,
+      #parcours .reveal { transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    }
     #projets .reveal,
     #projets .card,
     #projets .caption {
